@@ -41,10 +41,20 @@ function AsumArray(numbers) {
     }
     return total;
 }
-console.log(sumArray( [1, 2, 3, 4])); // 輸出: 10
-console.log(sumArray([1.5, 2.5, 3])); // 輸出: 7
-console.log(sumArray("FIRST ARRAY")); // 輸出: 錯誤：輸入無效
 
-console.log(AsumArray([2, 3, 4, 5])); // 輸出: 14
-console.log(AsumArray([2.5, 3.5, 4, 7])); // 輸出: 17
-console.log(AsumArray("SECOND ARRAY")); // INVALID Input
+let result1 = sumArray([1, 2, 3, 4]);
+console.log(typeof result1 === 'string' ? result1 : result1); // 輸出: 10
+
+let result2 = sumArray([1.5, 2.5, 3]);
+console.log(typeof result2 === 'string' ? result2 : result2); // 輸出: 7
+
+let result3 = sumArray("FIRST ARRAY");
+console.log(typeof result3 === 'string' ? result3 : result3); // 輸出: 錯誤：輸入無效
+
+try {
+    console.log(AsumArray([2, 3, 4, 5]));
+    console.log(AsumArray([2.5, 3.5, 4, 7]));
+    console.log(AsumArray("SECOND ARRAY"));
+} catch (e) {
+    console.log(e.message);
+}
