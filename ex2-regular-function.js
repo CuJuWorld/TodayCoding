@@ -56,12 +56,20 @@ console.log(typeof result3 === 'string' ? result3 : result3);
 try {
     let result4 = AsumArray([2, 3, 4, 5]);
     console.log(result4);
+} catch (e) {
+    console.log(e.message);
+}
 
+try {
     let result5 = AsumArray([2.5, 3.5, 4, 7]);
     console.log(result5);
+} catch (e) {
+    console.log(e.message);
+}
 
+try {
     let result6 = AsumArray("SECOND ARRAY");
-    console.log(result6); // This line will not be reached if an error is thrown
+    console.log(result6);
 } catch (e) {
     console.log(e.message);
 }
