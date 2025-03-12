@@ -42,19 +42,26 @@ function AsumArray(numbers) {
     return total;
 }
 
+// Handling sumArray calls
 let result1 = sumArray([1, 2, 3, 4]);
-console.log(typeof result1 === 'string' ? result1 : result1); // 輸出: 10
+console.log(typeof result1 === 'string' ? result1 : result1);
 
 let result2 = sumArray([1.5, 2.5, 3]);
-console.log(typeof result2 === 'string' ? result2 : result2); // 輸出: 7
+console.log(typeof result2 === 'string' ? result2 : result2);
 
 let result3 = sumArray("FIRST ARRAY");
-console.log(typeof result3 === 'string' ? result3 : result3); // 輸出: 錯誤：輸入無效
+console.log(typeof result3 === 'string' ? result3 : result3);
 
+// Handling AsumArray calls
 try {
-    console.log(AsumArray([2, 3, 4, 5]));
-    console.log(AsumArray([2.5, 3.5, 4, 7]));
-    console.log(AsumArray("SECOND ARRAY"));
+    let result4 = AsumArray([2, 3, 4, 5]);
+    console.log(result4);
+
+    let result5 = AsumArray([2.5, 3.5, 4, 7]);
+    console.log(result5);
+
+    let result6 = AsumArray("SECOND ARRAY");
+    console.log(result6); // This line will not be reached if an error is thrown
 } catch (e) {
     console.log(e.message);
 }
