@@ -41,7 +41,7 @@ function AsumArray(numbers) {
     }
     return total;
 }
-console.log(sumArray('\n'+ [1, 2, 3, 4])); // 輸出: 10
+console.log(sumArray( [1, 2, 3, 4])); // 輸出: 10
 console.log(sumArray([1.5, 2.5, 3])); // 輸出: 7
 console.log(sumArray("FIRST ARRAY")); // 輸出: 錯誤：輸入無效
 
