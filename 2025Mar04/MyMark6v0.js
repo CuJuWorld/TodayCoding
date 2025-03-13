@@ -39,7 +39,9 @@ function createArraysFromPool(positionIndexArrays, poolArray) {
         for (let j = 0; j < positionIndexArrays[i].length; j++) {
             newArray.push(poolArray[positionIndexArrays[i][j]]);
         }
-        resultArrays.push(newArray);
+        // Sort the first 6 numbers in ascending order
+        const sortedArray = newArray.slice(0, 6).sort((a, b) => a - b).concat(newArray.slice(6));
+        resultArrays.push(sortedArray);
     }
     return resultArrays;
 }
