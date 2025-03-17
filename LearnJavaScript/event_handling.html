@@ -84,11 +84,9 @@
 
         // Setup button3 to show how many times button2 has been clicked
         document.getElementById('button3').addEventListener('click', function() {
-            let count2 = document.getElementById('count2').textContent;
+            let count2 = parseInt(document.getElementById('count2').textContent); // Ensure count2 is an integer
             console.log('Button 2 click count:', count2); // Debug log
             alert('Button 2 has been clicked ' + count2 + ' times');
-            let count3 = document.getElementById('count3');
-            count3.textContent = parseInt(count3.textContent) + 1;
         });
 
         // Purpose of the callback:
