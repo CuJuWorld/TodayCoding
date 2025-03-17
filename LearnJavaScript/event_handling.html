@@ -19,23 +19,28 @@
 
         // Encapsulated button setup
         (function() {
-            function setupButtons() {
-                // Loop through buttons 1 and 2
-                for (var i = 1; i < 3; i++) {
-                    // Add a click event listener to each button
-                    document.getElementById('button' + i).addEventListener('click', (function(i) {
-                        // Create a closure to capture the current value of 'i'
-                        return function() {
-                            // This function will be called when the button is clicked
-                            alert('Button ' + i + ' clicked');
-                        };
-                    })(i)); // Immediately invoke the function to capture the current value of 'i'
-                }
+            function setupButton1() {
+                document.getElementById('button1').addEventListener('click', function() {
+                    alert('Button 1 clicked');
+                });
             }
 
-            // Run the setupButtons function when the page loads
-            window.onload = setupButtons;
+            // Run the setupButton1 function when the page loads
+            window.onload = setupButton1;
         })(); // IIFE to encapsulate the button setup logic
+
+        // Callback function for button2
+        function setupButton2(callback) {
+            document.getElementById('button2').addEventListener('click', callback);
+        }
+
+        // Define the callback function
+        function button2Callback() {
+            alert('Button 2 clicked');
+        }
+
+        // Setup button2 with the callback function
+        setupButton2(button2Callback);
     </script>
 </body>
 </html>
