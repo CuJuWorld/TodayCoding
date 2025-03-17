@@ -1,8 +1,12 @@
-function createDiscountGenerator(discount) {
-    return function(price) {
-        return price - (price * discount);
-    };
-}
+const createDiscountGenerator = (discount) => {
+    /* 
+    The advantage of using a closure here is that the inner function retains access to the 'discount' variable
+    even after the outer function has finished executing. This allows us to create multiple discount functions
+    with different discount rates without having to pass the discount rate each time we call the function.
+    This arrow function is also a closure.
+    */
+    return (price) => price - (price * discount);
+};
 
 // Example Usage:
 const tenPercentOff = createDiscountGenerator(0.10);
