@@ -12,6 +12,9 @@ function createCart() {
         
         // Method to remove an item by name
         removeItem: function(name) {
+            // const newCart = cart.filter(item => item.name !== name);
+            // if (newCart.length !== cart.length) {
+            //     cart = newCart;
             const index = cart.findIndex(item => item.name === name);
             if (index !== -1) {
                 cart.splice(index, 1);
@@ -24,7 +27,11 @@ function createCart() {
         
         // Method to calculate the total price of items in the cart
         getTotal: function() {
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            // Use reduce to sum up the prices of all items in the cart
+            const total = cart.reduce((sum, item) => {
+                // sum is the accumulator, item is the current element being processed
+                return sum + item.price;
+            }, 0); // 0 is the initial value of the accumulator
             console.log(`Total price: ${total}`);
             return total;
         },

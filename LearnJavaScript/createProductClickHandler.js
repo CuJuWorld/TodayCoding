@@ -1,19 +1,17 @@
 const createProductClickHandler = (productId, productName) => {
-    // This is a closure function. The advantage of using a closure is that it allows the inner function
-    // to access the variables of the outer function even after the outer function has finished executing.
-    // This helps in creating functions with private variables that can maintain state.
+    /* This is a closure function. The advantage of using a closure is that it allows the inner function
+    to access the variables of the outer function even after the outer function has finished executing.
+    This helps in creating functions with private variables that can maintain state. */
     return () => {
         console.log(`Product ID: ${productId}, Product Name: ${productName}`);
     };
 }
-
 /* 
 function createProductClickHandler(productId, productName) {
     return function() {
         console.log(`Product ID: ${productId}, Product Name: ${productName}`);
     };
 }
-
 */
 
 // Example usage of createProductClickHandler
