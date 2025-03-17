@@ -12,7 +12,7 @@ console.log(isEven(10)); // 輸出: true
 console.log(isEven(7)); // 輸出: false
 
 // 4. 攝氏轉華氏的箭頭函數
-const celsiusToFahrenheit = (celsius) => (celsius * 9) / 5 + 32;
+const celsiusToFahrenheit = (c) => (c * 9) / 5 + 32;
 console.log(celsiusToFahrenheit(0)); // 輸出: 32
 
 // 5. 問候函數
@@ -37,7 +37,6 @@ function getFilteredUserData(users, minAge, maxAge, location) {
             });
         }
     }
-
     return result;
 }
 
@@ -51,5 +50,25 @@ const users = [
 ];
 
 const filteredUsers = getFilteredUserData(users, 20, 30, "New York");
-console.log(filteredUsers);
 
+console.log("filteredUsers", filteredUsers);
+
+
+// let getFilteredUserData = (users, minAge, maxAge, location) => {
+//     const result = [];
+
+//     for (let i = 0; i < users.length; i++) {
+//         const user = users[i];
+//         if (user.age >= minAge && user.age <= maxAge && user.location === location) {
+//             // Push the selected properties of matching users into the result array
+//             result.push({
+//                 id: user.id,
+//                 name: user.name,
+//                 email: user.email,
+//                 interests: user.interests,
+//             });
+//         }
+//     }
+//     console.log(result);
+//     return result;
+// };
