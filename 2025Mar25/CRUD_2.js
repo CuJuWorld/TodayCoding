@@ -1,151 +1,345 @@
-/*
-Key Notes:
-Mock Data: This example uses in-memory arrays (books, authors, categories, reviews) to store data. In a real-world application, you would use a database.
-Validation: Add proper validation for incoming requests using libraries like Joi or express-validator.
-Error Handling: Enhance error handling for better user feedback.
-Relationships: The example includes relationships like linking reviews to books.
-You can run this code by installing express using npm install express and then executing the file with node REST_API12.js.
-*/
+// Products
+const products = [
+  { id: 1, name: 'Product 1', categoryId: 101, price: 20 },
+  { id: 2, name: 'Product 2', categoryId: 102, price: 30 },
+];
+const BlueiMac = 'BlueiMac'; 
+const iPhone16e = 'iPhone16e';
+const MacBookAir13 = 'MacBookAir13';
+const MacBookPro16 = 'MacBookPro16';
+const AppleWatchUltra2 = 'AppleWatchUltra2';
+const MacMini = 'MacMini';
+const iPhone16Plus = 'iPhone16Plus';
+const MacBookAir15 = 'MacBookAir15';
+const MacBookPro14 = 'MacBookPro14';
+const YellowiMac = 'YellowiMac';
+const iPhone16ProMax = 'iPhone16ProMax';
+const PinkiMac = 'PinkiMac';
+const AppleWatch10_46mm = 'AppleWatch10_46mm';
+const SilveriMac = 'SilveriMac';
+const AppleWatch10_42mm = 'AppleWatch10_42mm';
+const MacStudio = 'MacStudio';
+const PurpleiMac = 'PurpleiMac';
 
-const express = require('express');
-const app = express();
-app.use(express.json());
+const TodayOrders = [
+    { customerId: 'HK001', orderDetails: [{ items: [{ productId: BlueiMac, amount: 888 }, { productId: iPhone16e, amount: 488 }] }] },
+    { customerId: 'CN002', orderDetails: [{ items: [{ productId: MacBookAir13, amount: 788 }] }] },
+    { customerId: 'HK001', orderDetails: [{ items: [{ productId: MacBookPro16, amount: 1088 }] }] },
+    { customerId: 'CN001', orderDetails: [{ items: [{ productId: AppleWatchUltra2, amount: 788 }, { productId: MacMini, amount: 688 }] }] },
+    { customerId: 'CN002', orderDetails: [{ items: [{ productId: iPhone16Plus, amount: 688 }, { productId: MacBookAir15, amount: 888 }] }] },
+    { customerId: 'HK001', orderDetails: [{ items: [{ productId: MacBookPro14, amount: 988 }, { productId: iPhone16ProMax, amount: 988 }] }] },
+    { customerId: 'HK003', orderDetails: [{ items: [{ productId: AppleWatch10_46mm, amount: 688 }, { productId: MacStudio, amount: 1288 }] }] }
+];
+// Create a new product
+function createProduct(product) {
+  // Implementation here
+}
 
-// Mock data
-let books = [];
-let authors = [];
-let categories = [];
-let reviews = [];
+// Create a new product (async)
+async function createProduct(product) {
+  // Implementation here: API POST request to productsApiUrl
+  console.log('Creating product', product);
+}
 
-// Books Endpoints
-app.post('/api/books', (req, res) => {
-    const book = { id: books.length + 1, ...req.body };
-    books.push(book);
-    res.status(201).send(book);
-});
+// Retrieve all products
+function getAllProducts(query) {
+  // Implementation here
+}
 
-app.get('/api/books', (req, res) => {
-    res.send(books);
-});
+// Retrieve a specific product by ID
+function getProductById(id) {
+  // Implementation here
+}
 
-app.get('/api/books/:bookId', (req, res) => {
-    const book = books.find(b => b.id === parseInt(req.params.bookId));
-    if (!book) return res.status(404).send('Book not found');
-    res.send(book);
-});
+// Update an existing product by ID
+function updateProduct(id, updates) {
+  // Implementation here
+}
 
-app.put('/api/books/:bookId', (req, res) => {
-    const book = books.find(b => b.id === parseInt(req.params.bookId));
-    if (!book) return res.status(404).send('Book not found');
-    Object.assign(book, req.body);
-    res.send(book);
-});
+// Delete a product by ID
+function deleteProduct(id) {
+  // Implementation here
+}
 
-app.delete('/api/books/:bookId', (req, res) => {
-    const bookIndex = books.findIndex(b => b.id === parseInt(req.params.bookId));
-    if (bookIndex === -1) return res.status(404).send('Book not found');
-    books.splice(bookIndex, 1);
-    res.status(204).send();
-});
+// Categories
+const categories = [
+  { id: 101, name: 'Category 1' },
+  { id: 102, name: 'Category 2' },
+];
 
-// Authors Endpoints
-app.post('/api/authors', (req, res) => {
-    const author = { id: authors.length + 1, ...req.body };
-    authors.push(author);
-    res.status(201).send(author);
-});
+// Create a new category
+function createCategory(category) {
+  // Implementation here
+}
 
-app.get('/api/authors', (req, res) => {
-    res.send(authors);
-});
+// Retrieve all categories
+function getAllCategories() {
+  // Implementation here
+}
 
-app.get('/api/authors/:authorId', (req, res) => {
-    const author = authors.find(a => a.id === parseInt(req.params.authorId));
-    if (!author) return res.status(404).send('Author not found');
-    res.send(author);
-});
+// Retrieve a specific category by ID
+function getCategoryById(id) {
+  // Implementation here
+}
 
-app.put('/api/authors/:authorId', (req, res) => {
-    const author = authors.find(a => a.id === parseInt(req.params.authorId));
-    if (!author) return res.status(404).send('Author not found');
-    Object.assign(author, req.body);
-    res.send(author);
-});
+// Update an existing category by ID
+function updateCategory(id, updates) {
+  // Implementation here
+}
 
-app.delete('/api/authors/:authorId', (req, res) => {
-    const authorIndex = authors.findIndex(a => a.id === parseInt(req.params.authorId));
-    if (authorIndex === -1) return res.status(404).send('Author not found');
-    authors.splice(authorIndex, 1);
-    res.status(204).send();
-});
+// Delete a category by ID
+function deleteCategory(id) {
+  // Implementation here
+}
 
-// Categories Endpoints
-app.post('/api/categories', (req, res) => {
-    const category = { id: categories.length + 1, ...req.body };
-    categories.push(category);
-    res.status(201).send(category);
-});
+// Customers
+const customers = [
+  { id: 201, name: 'Customer 1' },
+  { id: 202, name: 'Customer 2' },
+];
 
-app.get('/api/categories', (req, res) => {
-    res.send(categories);
-});
+// Create a new customer
+function createCustomer(customer) {
+  // Implementation here
+}
 
-app.get('/api/categories/:categoryId', (req, res) => {
-    const category = categories.find(c => c.id === parseInt(req.params.categoryId));
-    if (!category) return res.status(404).send('Category not found');
-    res.send(category);
-});
+// Retrieve all customers
+function getAllCustomers() {
+  // Implementation here
+}
 
-app.put('/api/categories/:categoryId', (req, res) => {
-    const category = categories.find(c => c.id === parseInt(req.params.categoryId));
-    if (!category) return res.status(404).send('Category not found');
-    Object.assign(category, req.body);
-    res.send(category);
-});
+// Retrieve a specific customer by ID
+function getCustomerById(id) {
+  // Implementation here
+}
 
-app.delete('/api/categories/:categoryId', (req, res) => {
-    const categoryIndex = categories.findIndex(c => c.id === parseInt(req.params.categoryId));
-    if (categoryIndex === -1) return res.status(404).send('Category not found');
-    categories.splice(categoryIndex, 1);
-    res.status(204).send();
-});
+// Update an existing customer by ID
+function updateCustomer(id, updates) {
+  // Implementation here
+}
 
-// Reviews Endpoints
-app.post('/api/books/:bookId/reviews', (req, res) => {
-    const book = books.find(b => b.id === parseInt(req.params.bookId));
-    if (!book) return res.status(404).send('Book not found');
-    const review = { id: reviews.length + 1, bookId: book.id, ...req.body };
-    reviews.push(review);
-    res.status(201).send(review);
-});
+// Delete a customer by ID
+function deleteCustomer(id) {
+  // Implementation here
+}
 
-app.get('/api/books/:bookId/reviews', (req, res) => {
-    const bookReviews = reviews.filter(r => r.bookId === parseInt(req.params.bookId));
-    res.send(bookReviews);
-});
+// Orders
+const orders = [
+  { id: 301, customerId: 201, status: 'pending' },
+  { id: 302, customerId: 202, status: 'shipped' },
+];
 
-app.get('/api/reviews/:reviewId', (req, res) => {
-    const review = reviews.find(r => r.id === parseInt(req.params.reviewId));
-    if (!review) return res.status(404).send('Review not found');
-    res.send(review);
-});
+// Create a new order
+function createOrder(order) {
+  // Implementation here
+}
 
-app.put('/api/reviews/:reviewId', (req, res) => {
-    const review = reviews.find(r => r.id === parseInt(req.params.reviewId));
-    if (!review) return res.status(404).send('Review not found');
-    Object.assign(review, req.body);
-    res.send(review);
-});
+// Retrieve all orders
+function getAllOrders(query) {
+  // Implementation here
+}
 
-app.delete('/api/reviews/:reviewId', (req, res) => {
-    const reviewIndex = reviews.findIndex(r => r.id === parseInt(req.params.reviewId));
-    if (reviewIndex === -1) return res.status(404).send('Review not found');
-    reviews.splice(reviewIndex, 1);
-    res.status(204).send();
-});
+// Retrieve a specific order by ID
+function getOrderById(id) {
+  // Implementation here
+}
 
-// Start the server
-const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Update an existing order by ID
+function updateOrder(id, updates) {
+  // Implementation here
+}
+
+// Delete an order by ID
+function deleteOrder(id) {
+  // Implementation here
+}
+
+// Reviews
+const reviews = [
+  { id: 401, productId: 1, rating: 5 },
+  { id: 402, productId: 2, rating: 4 },
+];
+
+// Create a new review for a product
+function createReview(review) {
+  // Implementation here
+}
+
+// Retrieve all reviews for a specific product
+function getAllReviews(query) {
+  // Implementation here
+}
+
+// Retrieve a specific review by ID
+function getReviewById(id) {
+  // Implementation here
+}
+
+// Update an existing review by ID
+function updateReview(id, updates) {
+  // Implementation here
+}
+
+// Delete a review by ID
+function deleteReview(id) {
+  // Implementation here
+}
+
+// Products
+const productsApiUrl = '/api/products'; // Placeholder URL
+
+// Retrieve all products
+async function getAllProducts(query) {
+  // Implementation here: API GET request to productsApiUrl with query parameters
+  console.log('Retrieving all products with query', query);
+}
+
+// Retrieve a specific product by ID
+async function getProductById(id) {
+  // Implementation here: API GET request to productsApiUrl/{id}
+  console.log('Retrieving product by ID', id);
+}
+
+// Update an existing product by ID
+async function updateProduct(id, updates) {
+  // Implementation here: API PUT request to productsApiUrl/{id} with updates
+  console.log('Updating product', id, updates);
+}
+
+// Delete a product by ID
+async function deleteProduct(id) {
+  // Implementation here: API DELETE request to productsApiUrl/{id}
+  console.log('Deleting product', id);
+}
+
+// Categories
+const categoriesApiUrl = '/api/categories'; // Placeholder URL
+
+// Create a new category
+async function createCategory(category) {
+  // Implementation here: API POST request to categoriesApiUrl
+  console.log('Creating category', category);
+}
+
+// Retrieve all categories
+async function getAllCategories() {
+  // Implementation here: API GET request to categoriesApiUrl
+  console.log('Retrieving all categories');
+}
+
+// Retrieve a specific category by ID
+async function getCategoryById(id) {
+  // Implementation here: API GET request to categoriesApiUrl/{id}
+  console.log('Retrieving category by ID', id);
+}
+
+// Update an existing category by ID
+async function updateCategory(id, updates) {
+  // Implementation here: API PUT request to categoriesApiUrl/{id} with updates
+  console.log('Updating category', id, updates);
+}
+
+// Delete a category by ID
+async function deleteCategory(id) {
+  // Implementation here: API DELETE request to categoriesApiUrl/{id}
+  console.log('Deleting category', id);
+}
+
+// Customers
+const customersApiUrl = '/api/customers'; // Placeholder URL
+
+// Create a new customer
+async function createCustomer(customer) {
+  // Implementation here: API POST request to customersApiUrl
+  console.log('Creating customer', customer);
+}
+
+// Retrieve all customers
+async function getAllCustomers() {
+  // Implementation here: API GET request to customersApiUrl
+  console.log('Retrieving all customers');
+}
+
+// Retrieve a specific customer by ID
+async function getCustomerById(id) {
+  // Implementation here: API GET request to customersApiUrl/{id}
+  console.log('Retrieving customer by ID', id);
+}
+
+// Update an existing customer by ID
+async function updateCustomer(id, updates) {
+  // Implementation here: API PUT request to customersApiUrl/{id} with updates
+  console.log('Updating customer', id, updates);
+}
+
+// Delete a customer by ID
+async function deleteCustomer(id) {
+  // Implementation here: API DELETE request to customersApiUrl/{id}
+  console.log('Deleting customer', id);
+}
+
+// Orders
+const ordersApiUrl = '/api/orders'; // Placeholder URL
+
+// Create a new order
+async function createOrder(order) {
+  // Implementation here: API POST request to ordersApiUrl
+  console.log('Creating order', order);
+}
+
+// Retrieve all orders
+async function getAllOrders(query) {
+  // Implementation here: API GET request to ordersApiUrl with query parameters
+  console.log('Retrieving all orders with query', query);
+}
+
+// Retrieve a specific order by ID
+async function getOrderById(id) {
+  // Implementation here: API GET request to ordersApiUrl/{id}
+  console.log('Retrieving order by ID', id);
+}
+
+// Update an existing order by ID
+async function updateOrder(id, updates) {
+  // Implementation here: API PUT request to ordersApiUrl/{id} with updates
+  console.log('Updating order', id, updates);
+}
+
+// Delete an order by ID
+async function deleteOrder(id) {
+  // Implementation here: API DELETE request to ordersApiUrl/{id}
+  console.log('Deleting order', id);
+}
+
+// Reviews
+const reviewsApiUrl = '/api/reviews'; // Placeholder URL
+
+// Create a new review for a product
+async function createReview(review) {
+  // Implementation here: API POST request to reviewsApiUrl
+  console.log('Creating review', review);
+}
+
+// Retrieve all reviews for a specific product
+async function getAllReviews(query) {
+  // Implementation here: API GET request to reviewsApiUrl with query parameters
+  console.log('Retrieving all reviews with query', query);
+}
+
+// Retrieve a specific review by ID
+async function getReviewById(id) {
+  // Implementation here: API GET request to reviewsApiUrl/{id}
+  console.log('Retrieving review by ID', id);
+}
+
+// Update an existing review by ID
+async function updateReview(id, updates) {
+  // Implementation here: API PUT request to reviewsApiUrl/{id} with updates
+  console.log('Updating review', id, updates);
+}
+
+// Delete a review by ID
+async function deleteReview(id) {
+  // Implementation here: API DELETE request to reviewsApiUrl/{id}
+  console.log('Deleting review', id);
+}
