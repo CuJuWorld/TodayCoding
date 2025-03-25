@@ -1,11 +1,11 @@
+// Helper function to add delay
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function createCart() {
     // Private variable to store cart items
     let cart = [];
-
-    // Helper function to add delay
-    function delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
 
     return {
         // Method to add an item to the cart
@@ -43,10 +43,10 @@ function createCart() {
         getTotal: function() {
             // Use reduce to sum up the prices of all items in the cart
             const total = cart.reduce((sum, item) => {
-                // sum is the accumulator, item is the current element being processed
-                return sum + item.price;
+                // Convert item.price to a number before adding to sum
+                return sum + Number(item.price);
             }, 0); // 0 is the initial value of the accumulator
-            console.log(`Total price: ${total}`);
+            console.log(`Total price is USD${total}`);
             return total;
         },
         
@@ -57,7 +57,7 @@ function createCart() {
     };
 }
 
-const productDatabase = {
+var productDatabase = {
     'prod1': { name: 'iPhone 16e', USD: 499, quantity: 15 },
     'prod2': { name: 'iPhone 16 Plus', USD: 699, quantity: 5 },
     'prod3': { name: 'iPhone 16 Pro Max', USD: 899, quantity: 10 },
@@ -67,16 +67,48 @@ const productDatabase = {
 };
 
 // Test scenarios
-const myCart = createCart();
-myCart.addItem('iPhone 16e'); // Added: iPhone 16e, Price: $499
-myCart.addItem('iPhone 16 Pro Max'); // Added: iPhone 16 Pro Max, Price: $899
-myCart.addItem('Mac Air 15'); // Added: Mac Air 15, Price: $999
-myCart.getTotal(); // Total Price: $2397
-myCart.removeItem('iPhone 16e'); // Removed: iPhone 16e
-console.log(myCart.getItems()); // [{ name: 'iPhone 16 Pro Max', price: 899 }, { name: 'Mac Air 15', price: 999 }]
+(async () => {
+    // Create a new cart instance
+    const myCart = createCart();
 
-// Show the updated productDatabase dynamically
-console.log('Updated productDatabase:', Object.fromEntries(
-    Object.entries(productDatabase).filter(([key, value]) => value.quantity !== 0)
-));
+    // Add an item to the cart and wait for the operation to complete
+    await myCart.addItem('iPhone 16e'); // Added: iPhone 16e, Price: $499
+    myCart.getTotal(); // Total Price: $499
+    
+    // Add a delay before the next operation
+    await delay(1000);
+    // Add another item to the cart and wait for the operation to complete
+    await myCart.addItem('iPhone 16 Pro Max'); // Added: iPhone 16 Pro Max, Price: $899
+    myCart.getTotal(); // Total Price: $1398
+    
+    // Add a delay before the next operation
+    await delay(1000);
+    // Add another item to the cart and wait for the operation to complete
+    await myCart.addItem('Mac Air 15'); // Added: Mac Air 15, Price: $999
+    myCart.getTotal(); // Total Price: $2397
+    
+    // Add a delay before the next operation
+    await delay(2000);
+    // Remove an item from the cart and wait for the operation to complete
+    await myCart.removeItem('iPhone 16e'); // Removed: iPhone 16e
+    myCart.getTotal(); // Total Price: $1398
+
+    
+    // Add a delay before the next operation
+    await delay(2000);
+    // Log the current items in the cart
+
+    console.log(`\nNumber of purchased items: ${myCart.getItems().length}`);
+    console.log('Checkout Items:', myCart.getItems()); 
+    // [{ name: 'iPhone 16 Pro Max', price: 899 }, { name: 'Mac Air 15', price: 999 }]
+    console.log(`\nThank you, Payment of USD${myCart.getTotal()} processed successfully.`);
+
+    
+    // Add a delay before the next operation
+    await delay(2000);
+    // Show the updated productDatabase dynamically
+    console.log('\nUpdated productDatabase:', Object.fromEntries(
+        Object.entries(productDatabase).filter(([key, value]) => value.quantity !== 0)
+    ));
+})();
 
