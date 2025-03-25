@@ -50,15 +50,17 @@ const TodayOrders = [
     { customerId: 'HK003', orderDetails: [{ items: [{ productId: AppleWatch10_46mm, amount: 688 }, { productId: MacStudio, amount: 1288 }] }] }
 ];
 const Customerfeedbacks = [
-    { customerId: 'HK001', feedbackDetails: [{ productId: BlueiMac, ratings: [5, 4] }, { productId: iPhone16e, ratings: [2] }] },
-    { customerId: 'CN002', feedbackDetails: [{ productId: MacBookAir13, ratings: [3, 4, 5] }] },
-    { customerId: 'HK003', feedbackDetails: [{ productId: AppleWatch10_46mm, ratings: [1, 3] }, { productId: MacStudio, ratings: [5] }] }
+    { customerId: 'HK001', feedbackDetails: [{ productId: BlueiMac, ratings: [5, 4, 3, 4, 5] }, { productId: iPhone16e, ratings: [5, 3, 4, 5, 2] }] },
+    { customerId: 'CN002', feedbackDetails: [{ productId: MacBookAir13, ratings: [5, 5, 3, 4, 5] }] },
+    { customerId: 'HK003', feedbackDetails: [{ productId: AppleWatch10_46mm, ratings: [4, 3, 3, 1, 3] }, { productId: MacStudio, ratings: [2, 3, 4, 3, 4] }] }
 ];
 
-// Calculate total amounts per customer
+// Calculate total purchase per customer
 const customerTotals = TodayOrders.reduce((customerTotals, eachOrderSubTotal) => { 
+    // .reduce is used to accumulate the total amounts per customer
     // Flatten the order details and sum the amounts for each order
     const totalAmount = eachOrderSubTotal.orderDetails.flatMap(detail => 
+        // .flatMap is used to flatten the nested arrays of items and map them to their amounts
         detail.items.map(eachItem => eachItem.amount) 
     ).reduce((eachItemamount, amount) => eachItemamount + amount, 0); // Changed sum to eachItemamount
 
@@ -72,18 +74,9 @@ const customerTotals = TodayOrders.reduce((customerTotals, eachOrderSubTotal) =>
     return customerTotals;
 }, {});
 
-// Output individual customer totals
-Object.entries(customerTotals).forEach(([customerId, total]) => {
-    console.log(`Customer ${customerId} sub-total US$${total}\n`);
-});
-
-// Calculate and output the total sales for today
-const totalTodayAmounts = Object.values(customerTotals).reduce((sum, amount) => sum + amount, 0);
-
-console.log(`Today total Sales is US$${totalTodayAmounts}`);
-
 // Calculate total ratings and counts per customer
 const customerFeedbackTotals = Customerfeedbacks.reduce((feedbackTotals, eachFeedback) => {
+    // .reduce is used to accumulate the total ratings and counts per customer
     // Flatten the ratings and aggregate totals and counts
     const ratings = eachFeedback.feedbackDetails.flatMap(detail => detail.ratings);
     const totalRatings = ratings.reduce((sum, rating) => sum + rating, 0);
@@ -100,10 +93,38 @@ const customerFeedbackTotals = Customerfeedbacks.reduce((feedbackTotals, eachFee
     return feedbackTotals;
 }, {});
 
-// Output individual customer feedback totals
-Object.entries(customerFeedbackTotals).forEach(([customerId, { totalRatings, ratingCount }]) => {
-    console.log(`Customer ${customerId} total ratings: ${totalRatings}, rating count: ${ratingCount}`);
+// Combine and output customer totals and feedback
+Object.entries(customerTotals).forEach(([customerId, total]) => {
+    // .entries is used to get an array of key-value pairs from the customerTotals object
+    let tier = 'No Membership';
+    if (total > 4000) {
+        tier = 'Diamond';
+    } else if (total > 3000) {
+        tier = 'Gold';
+    } else if (total > 2000) {
+        tier = 'Silver';
+    } else if (total > 1000) {
+        tier = 'Bronze';
+    }
+    const feedback = customerFeedbackTotals[customerId] || { totalRatings: 0, ratingCount: 0 };
+    const averageRating = feedback.ratingCount ? (feedback.totalRatings / feedback.ratingCount).toFixed(2) : 0;
+    console.log(`Customer ${customerId} purchases US$${total} and becomes ${tier} membership \n Answered feedbacks: ${feedback.ratingCount}, sum of ratings: ${feedback.totalRatings}, average rating: ${averageRating}`);
+    if (feedback.ratingCount === 0) {
+        console.log(` CS sends friendly reminder to ${customerId} to give feedbacks`);
+    } else if (feedback.ratingCount > 0 && averageRating <= 3) {
+        console.log(` Send email to Supervisor to investigate the post-sales experiences of this customer ${customerId}`);
+    }
+    if (tier === 'Diamond') {
+        console.log(` Supervisor sends a coupon to ${customerId}`);
+    }
+    console.log(); // Add an empty line for separation
 });
+
+// Calculate and output the total sales for today
+const totalTodayAmounts = Object.values(customerTotals).reduce((sum, amount) => sum + amount, 0);
+// .value is used to get an array of values from the customerTotals object
+const todayDate = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).replace(/ /g, '-'); // Get current date in DD-MMM-YYYY format
+console.log(`${todayDate} total sales is US$${totalTodayAmounts}\n`);
 
 // Calculate total ratings and counts per product
 const productFeedbackTotals = Customerfeedbacks.reduce((feedbackTotals, eachFeedback) => {
@@ -127,4 +148,7 @@ const productFeedbackTotals = Customerfeedbacks.reduce((feedbackTotals, eachFeed
 Object.entries(productFeedbackTotals).forEach(([productId, { totalRatings, ratingCount }]) => {
     const averageRating = (totalRatings / ratingCount).toFixed(2);
     console.log(`${productId}: { count: ${ratingCount}, totalRatings: ${totalRatings}, average: ${averageRating} }`);
+    if (averageRating <= 3) {
+        console.log(` Supervisor, please investigate the potential issues with ${productId}`);
+    }
 });
