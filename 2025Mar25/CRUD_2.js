@@ -3,33 +3,14 @@ const products = [
   { id: 1, name: 'Product 1', categoryId: 101, price: 20 },
   { id: 2, name: 'Product 2', categoryId: 102, price: 30 },
 ];
-const BlueiMac = 'BlueiMac'; 
-const iPhone16e = 'iPhone16e';
-const MacBookAir13 = 'MacBookAir13';
-const MacBookPro16 = 'MacBookPro16';
-const AppleWatchUltra2 = 'AppleWatchUltra2';
-const MacMini = 'MacMini';
-const iPhone16Plus = 'iPhone16Plus';
-const MacBookAir15 = 'MacBookAir15';
-const MacBookPro14 = 'MacBookPro14';
-const YellowiMac = 'YellowiMac';
-const iPhone16ProMax = 'iPhone16ProMax';
-const PinkiMac = 'PinkiMac';
-const AppleWatch10_46mm = 'AppleWatch10_46mm';
-const SilveriMac = 'SilveriMac';
-const AppleWatch10_42mm = 'AppleWatch10_42mm';
-const MacStudio = 'MacStudio';
-const PurpleiMac = 'PurpleiMac';
-
-const TodayOrders = [
-    { customerId: 'HK001', orderDetails: [{ items: [{ productId: BlueiMac, amount: 888 }, { productId: iPhone16e, amount: 488 }] }] },
-    { customerId: 'CN002', orderDetails: [{ items: [{ productId: MacBookAir13, amount: 788 }] }] },
-    { customerId: 'HK001', orderDetails: [{ items: [{ productId: MacBookPro16, amount: 1088 }] }] },
-    { customerId: 'CN001', orderDetails: [{ items: [{ productId: AppleWatchUltra2, amount: 788 }, { productId: MacMini, amount: 688 }] }] },
-    { customerId: 'CN002', orderDetails: [{ items: [{ productId: iPhone16Plus, amount: 688 }, { productId: MacBookAir15, amount: 888 }] }] },
-    { customerId: 'HK001', orderDetails: [{ items: [{ productId: MacBookPro14, amount: 988 }, { productId: iPhone16ProMax, amount: 988 }] }] },
-    { customerId: 'HK003', orderDetails: [{ items: [{ productId: AppleWatch10_46mm, amount: 688 }, { productId: MacStudio, amount: 1288 }] }] }
-];
+const productDatabase = {
+  'prod1': { name: 'iPhone 16e', USD: 499, quantity: 15 },
+  'prod2': { name: 'iPhone 16 Plus', USD: 699, quantity: 5 },
+  'prod3': { name: 'iPhone 16 Pro Max', USD: 899, quantity: 10 },
+  'prod4': { name: 'Mac Air 15', USD: 999, quantity: 20 },
+  'prod5': { name: 'Mac Pro 14', USD: 1099, quantity: 12 },
+  'prod6': { name: 'Mac Pro 16', USD: 1199, quantity: 8 }
+};
 // Create a new product
 function createProduct(product) {
   // Implementation here
