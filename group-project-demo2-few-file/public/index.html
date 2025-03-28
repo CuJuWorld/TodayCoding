@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD App</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <h1>CRUD App</h1>
+    <h2>Create/Update Item</h2>
+    <form id="itemForm">
+        <label for="name">Item Name:</label>
+        <input type="text" id="name" required>
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" required>
+
+        <label for="image">Image:</label>
+        <input type="file" id="image" accept="image/*" onchange="previewImage(event)">
+
+        <img id="imagePreview" src="" alt="Image Preview" style="display:none;">
+
+        <button type="button" id="submitButton" onclick="createItem()">Create Item</button>
+    </form>
+
+    <h2>Items</h2>
+    <ul id="itemsList"></ul>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
