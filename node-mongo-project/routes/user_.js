@@ -6,10 +6,10 @@ const User = require('../models/user'); // Import the User model
 // Get all users - retrieves all users from the database
 router.get('/', async (req, res) => {
     try {
-        const users = await User.find();
-        res.json(users);
+        const users = await User.find(); // Await the completion of the User.find() promise
+        res.json(users); // Respond with the users in JSON format
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        res.status(500).json({ message: err.message }); // Respond with a 500 status code and error message
     }
 });
 
@@ -17,13 +17,13 @@ router.get('/', async (req, res) => {
 // Get a single user by ID - retrieves a specific user by their ID
 router.get('/:id', async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.params.id); // Await the completion of the User.findById() promise
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'User not found' }); // Respond with a 404 status code and error message if user is not found
         }
-        res.json(user);
+        res.json(user); // Respond with the user in JSON format
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        res.status(500).json({ message: err.message }); // Respond with a 500 status code and error message
     }
 });
 
@@ -37,10 +37,10 @@ router.post('/', async (req, res) => {
 
 
     try {
-        const newUser = await user.save();
-        res.status(201).json(newUser);
+        const newUser = await user.save(); // Await the completion of the user.save() promise
+        res.status(201).json(newUser); // Respond with a 201 status code and the new user in JSON format
     } catch (err) {
-        res.status(400).json({ message: err.message });
+        res.status(400).json({ message: err.message }); // Respond with a 400 status code and error message
     }
 });
 
@@ -48,9 +48,9 @@ router.post('/', async (req, res) => {
 // Update a user by ID - updates an existing user's information
 router.patch('/:id', async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.params.id); // Await the completion of the User.findById() promise
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'User not found' }); // Respond with a 404 status code and error message if user is not found
         }
 
 
@@ -62,10 +62,10 @@ router.patch('/:id', async (req, res) => {
         }
 
 
-        const updatedUser = await user.save();
-        res.json(updatedUser);
+        const updatedUser = await user.save(); // Await the completion of the user.save() promise
+        res.json(updatedUser); // Respond with the updated user in JSON format
     } catch (err) {
-        res.status(400).json({ message: err.message });
+        res.status(400).json({ message: err.message }); // Respond with a 400 status code and error message
     }
 });
 
@@ -73,13 +73,13 @@ router.patch('/:id', async (req, res) => {
 // Delete a user by ID - deletes a user from the database
 router.delete('/:id', async (req, res) => {
     try {
-        const user = await User.findByIdAndDelete(req.params.id);
+        const user = await User.findByIdAndDelete(req.params.id); // Await the completion of the User.findByIdAndDelete() promise
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'User not found' }); // Respond with a 404 status code and error message if user is not found
         }
-        res.json({ message: 'User deleted successfully' });
+        res.json({ message: 'User deleted successfully' }); // Respond with a success message in JSON format
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        res.status(500).json({ message: err.message }); // Respond with a 500 status code and error message
     }
 });
 
