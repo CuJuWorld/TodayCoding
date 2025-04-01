@@ -1,0 +1,21 @@
+https://docs.google.com/document/d/1sP_HkmmloPWUTl-0-UQHlao26t2rqv8B2oAd3zBs1Fw/edit?usp=sharing
+
+https://www.hktvmall.com/hktv/zh/
+
+Advanced Exercises with NodeJs
+https://www.geeksforgeeks.org/rest-api-using-the-express-to-perform-crud-create-read-update-delete/ 
+
+Create Relationship in MongoDB
+https://www.geeksforgeeks.org/create-relationship-in-mongodb/
+
+ER Diagram Tutorial
+https://docs.google.com/document/d/11bOndVWqyFoVWz13M0VBVvyb3mtnfbg4xINMKbK2q8k/edit?usp=sharing
+
+ER Diagram Tutorial Ans:
+https://drive.google.com/file/d/1zO7PP0txeaA8r9lhepCXk1OYCadXiTpR/view?usp=sharing
+
+A Beginner’s Guide to Using Node.js with MongoDB
+https://medium.com/@samuelnoye35/a-beginners-guide-to-using-node-js-with-mongodb-695261eb8491
+
+Setting up Node.js with MongoDB:
+https://docs.google.com/document/d/1hGwIIotrpT-IHFW3ch1GAcvSlcgNh6WsLfmmyCbYKhY/edit?usp=sharing
