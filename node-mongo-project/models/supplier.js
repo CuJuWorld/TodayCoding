@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
-const ProductSchema = new mongoose.Schema({
+const SupplierSchema = new mongoose.Schema({
     SKUid: {
         type: Number,
         required: true,
         unique: true,
     },
-    ProductName: {
+    SupplierName: {
         type: String,
         required: true,
     },
@@ -14,22 +14,13 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    USD: {
-        type: Number,
-        required: true,
-    },
-    InStockQuantity: {
-        type: Number,
-        required: true,
-    },
-    Supplier: {
-        type: String,
+    Joineddate: {
+        type: Date,
         required: true,
     },
 });
 
-
-module.exports = mongoose.model('Product', ProductSchema);
+module.exports = mongoose.model('Supplier', SupplierSchema);
 // Here's a quick breakdown of the process:
 
 // Model Name: User
