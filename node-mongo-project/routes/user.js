@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user'); // Import the User model
@@ -127,7 +126,6 @@ router.delete('/:id', async (req, res) => {
 
 
 module.exports = router;
-=======
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user'); // Import the User model
@@ -251,4 +249,3 @@ router.delete('/:id', async (req, res) => {
 
 
 module.exports = router;
->>>>>>> 98dc13dbf5bc4339c9329d80432d019f79dc2e77
