@@ -1,22 +1,26 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
-    name: {
+const ProductSchema = new mongoose.Schema({
+    SKUid: {
+        type: Number,
+        required: true,
+        unique: true,
+    },
+    ProductName: {
         type: String,
         required: true,
     },
-    email: {
-        type: String,
+    USD: {
+        type: Number,
         required: true,
-        unique: true, // Added for uniqueness
     },
-    date: {
-        type: Date,
-        default: Date.now,
+    InStockQuantity: {
+        type: Number,
+        required: true,
     },
 });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Product', ProductSchema);
 // Here's a quick breakdown of the process:
 
 // Model Name: User

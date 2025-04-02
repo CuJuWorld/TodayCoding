@@ -6,7 +6,15 @@ const User = require('../models/user'); // Import the User model
 // Get all users
 router.get('/', async (req, res) => {
     try {
-        const users = await User.find();
+        let { name } = req.query;
+        let users;
+
+        // Filter by name
+        if(name) {
+            users = await User.find( { name: name } );
+        } else {
+            users = await User.find();
+        }
         res.json(users);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -17,27 +25,58 @@ router.get('/', async (req, res) => {
 // Get a single user by ID
 router.get('/:id', async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+        const { id } = req.params;
+        // const { name } = req.query;
+        var user;
+
+        try {
+            //user = await User.findById(id);
+            user = await User.findOne( { _id: id });
+            if(!user) res.status(404).json({ message: 'User not found' });
+        } catch (err) {
+            res.status(404).json({ message: 'User not found' });
         }
         res.json(user);
     } catch (err) {
+        console.log("err", err);
         res.status(500).json({ message: err.message });
     }
 });
 
 
+
+
+
+
+const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+};
+  
+
+
 // Create a new user
 router.post('/', async (req, res) => {
+    const { name, email, address} = req.body;
+    if(!name) res.status(400).json({ message: "Missing name field" });
+    if(!email) res.status(400).json({ message: "Missing email field" });
+    if(!address) res.status(400).json({ message: "Missing address field" });
+
+    const duplicatedEmail = await User.findOne( { email: email }) ? true: false;
+    if(duplicatedEmail) res.status(400).json({ message: "duplicated email field. Please enter another email address" });
+
+    if(!validateEmail(email)) res.status(400).json({ message: "invalid email field" });
     const user = new User({
-        name: req.body.name,
-        email: req.body.email,
+        name,
+        email,
+        address
     });
 
-
     try {
-        const newUser = await user.save();
+        const newUser = await user.save(); // create users collection
         res.status(201).json(newUser);
     } catch (err) {
         res.status(400).json({ message: err.message });
@@ -46,24 +85,21 @@ router.post('/', async (req, res) => {
 
 
 // Update a user by ID
-router.patch('/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+        let user;
+        const { name, email } = req.body;
+        try {
+            user = await User.findById(req.params.id);
+            if(!user) res.status(404).json({ message: 'User not found' });
+        } catch (err) {
+            res.status(404).json({ message: 'User not found' });
         }
 
-
-        if (req.body.name != null) {
-            user.name = req.body.name;
-        }
-        if (req.body.email != null) {
-            user.email = req.body.email;
-        }
-
-
-        const updatedUser = await user.save();
-        res.json(updatedUser);
+        if (name) user.name = name;
+        if (email) user.email = email;
+        user = await user.save(); // update users collection
+        res.json(user);
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
@@ -73,11 +109,16 @@ router.patch('/:id', async (req, res) => {
 // Delete a user by ID
 router.delete('/:id', async (req, res) => {
     try {
-        const user = await User.findByIdAndDelete(req.params.id);
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+        const { id } = req.params;
+        let user;
+        try {
+            user = await User.findOneAndDelete({ _id: id});
+            // user = await User.findByIdAndDelete(id);
+            if(!user) return res.status(404).json({ message: `User ${id} has deleted before.` });
+        } catch (error) {
+            return res.status(404).json({ message: `User ${id} has deleted before.` });
         }
-        res.json({ message: 'User deleted successfully' });
+        res.json({ message: `User ${id} deleted successfully` });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
