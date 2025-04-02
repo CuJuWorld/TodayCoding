@@ -10,6 +10,11 @@ const SupplierSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    SupplierEmail: {
+        type: String,
+        required: true,
+        unique: true, // Added for uniqueness
+    },
     Category: {
         type: String,
         required: true,

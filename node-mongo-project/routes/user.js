@@ -7,12 +7,12 @@ const User = require('../models/user'); // Import the User model
 // Get all users
 router.get('/', async (req, res) => {
     try {
-        let { name } = req.query;
+        let { UserName } = req.query;
         let users;
 
-        // Filter by name
-        if(name) {
-            users = await User.find( { name: name } );
+        // Filter by UserName
+        if(UserName) {
+            users = await User.find( { UserName: UserName } );
         } else {
             users = await User.find();
         }
@@ -44,8 +44,8 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-const validateEmail = (email) => {
-    return String(email)
+const validateEmail = (UserEmail) => {
+    return String(UserEmail)
       .toLowerCase()
       .match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -56,18 +56,18 @@ const validateEmail = (email) => {
 
 // Create a new user
 router.post('/', async (req, res) => {
-    const { name, email, address} = req.body;
-    if(!name) res.status(400).json({ message: "Missing name field" });
-    if(!email) res.status(400).json({ message: "Missing email field" });
+    const { UserName, UserEmail, address} = req.body;
+    if(!UserName) res.status(400).json({ message: "Missing UserName field" });
+    if(!UserEmail) res.status(400).json({ message: "Missing UserEmail field" });
     if(!address) res.status(400).json({ message: "Missing address field" });
 
-    const duplicatedEmail = await User.findOne( { email: email }) ? true: false;
-    if(duplicatedEmail) res.status(400).json({ message: "duplicated email field. Please enter another email address" });
+    const duplicatedEmail = await User.findOne( { UserEmail: UserEmail }) ? true: false;
+    if(duplicatedEmail) res.status(400).json({ message: "duplicated UserEmail field. Please enter another UserEmail address" });
 
-    if(!validateEmail(email)) res.status(400).json({ message: "invalid email field" });
+    if(!validateEmail(UserEmail)) res.status(400).json({ message: "invalid UserEmail field" });
     const user = new User({
-        name,
-        email,
+        UserName,
+        UserEmail,
         address
     });
 
@@ -84,7 +84,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         let user;
-        const { name, email } = req.body;
+        const { UserName, UserEmail } = req.body;
         try {
             user = await User.findById(req.params.id);
             if(!user) res.status(404).json({ message: 'User not found' });
@@ -92,8 +92,8 @@ router.put('/:id', async (req, res) => {
             res.status(404).json({ message: 'User not found' });
         }
 
-        if (name) user.name = name;
-        if (email) user.email = email;
+        if (UserName) user.UserName = UserName;
+        if (UserEmail) user.UserEmail = UserEmail;
         user = await user.save(); // update users collection
         res.json(user);
     } catch (err) {

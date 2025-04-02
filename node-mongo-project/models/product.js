@@ -22,7 +22,7 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    Supplier: {
+    SupplierName: {
         type: String,
         required: true,
     },

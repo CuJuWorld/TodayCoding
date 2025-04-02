@@ -6,13 +6,46 @@ const app = express();
 app.use(bodyParser.json());
 
 var items = [
-    { "SKUid": 1, "ProductName": "iPhone 16e", "USD": 499, "InStockQuantity": 15 },
-    { "SKUid": 2, "ProductName": "iPhone 16 Plus", "USD": 699, "InStockQuantity": 5 },
-    { "SKUid": 3, "ProductName": "iPhone 16 Pro Max", "USD": 899, "InStockQuantity": 10 },
-    { "SKUid": 4, "ProductName": "Mac_Air_15", "USD": 999, "InStockQuantity": 20 },
-    { "SKUid": 5, "ProductName": "Mac_Pro_14", "USD": 1099, "InStockQuantity": 12 },
-    { "SKUid": 6, "ProductName": "Mac Pro 16", "USD": 1199, "InStockQuantity": 8 }
+    { "SKUid": 1, "ProductName": "iPhone 16e", "Category": "CellPhone", "USD": 499, "InStockQuantity": 15 , "SupplierName": "S01" },
+    { "SKUid": 2, "ProductName": "iPhone 16 Plus", "Category": "CellPhone", "USD": 699, "InStockQuantity": 5 , "SupplierName": "S01" },
+    { "SKUid": 3, "ProductName": "iPhone 16 Pro Max", "Category": "CellPhone", "USD": 899, "InStockQuantity": 10 , "SupplierName": "S01" },
+    { "SKUid": 4, "ProductName": "Mac_Air_15", "Category": "NoteBook", "USD": 999, "InStockQuantity": 20 , "SupplierName": "S02" },
+    { "SKUid": 5, "ProductName": "Mac_Pro_14", "Category": "NoteBook", "USD": 1099, "InStockQuantity": 12 , "SupplierName": "S02" },
+    { "SKUid": 6, "ProductName": "Mac Pro 16", "Category": "NoteBook", "USD": 1199, "InStockQuantity": 8 , "SupplierName": "S02"}
 ];
+
+var customers = [
+    { "UserName": "April CHAN", "UserEmail": "aprilchan@gmail.com", "Enrollmentdate": "02-Feb-2020" },
+    { "UserName": "Bonita CHEUNG", "UserEmail": "BonitaCHEUNG@gmail.com", "Enrollmentdate": "03-Mar-2020" },
+    { "UserName": "Ceci KWAN", "UserEmail": "CeciKWAN@gmail.com", "Enrollmentdate": "04-Apr-2020"  },
+    { "UserName": "DiDi LEE", "UserEmail": "DiDiLEE@gmail.com", "Enrollmentdate": "05-May-2020" },
+    {  "UserName": "Elis MA", "UserEmail": "ElisMA@gmail.com", "Enrollmentdate": "06-Jun-2020"  },
+    { "UserName": "Fiona YUA", "UserEmail": "FionaYUA@gmail.com", "Enrollmentdate": "07-Jul-2020" }
+];
+/*
+var customers = [
+    { "Cid": 1, "UserName": "April CHAN", "UserEmail": "aprilchan@gmail.com", "Enrollmentdate": "02-Feb-2020" },
+    { "Cid": 2, "UserName": "Bonita CHEUNG", "UserEmail": "BonitaCHEUNG@gmail.com", "Enrollmentdate": "03-Mar-2020" },
+    { "Cid": 3, "UserName": "Ceci KWAN", "UserEmail": "CeciKWAN@gmail.com", "Enrollmentdate": "04-Apr-2020"  },
+    { "Cid": 4, "UserName": "DiDi LEE", "UserEmail": "DiDiLEE@gmail.com", "Enrollmentdate": "05-May-2020" },
+    { "Cid": 5, "UserName": "Elis MA", "UserEmail": "ElisMA@gmail.com", "Enrollmentdate": "06-Jun-2020"  },
+    { "Cid": 6, "UserName": "Fiona YUA", "UserEmail": "FionaYUA@gmail.com", "Enrollmentdate": "07-Jul-2020" }
+];
+*/
+UserName: {
+    type: String,
+    required: true,
+},
+UserEmail: {
+    type: String,
+    required: true,
+    unique: true, // Added for uniqueness
+},
+Enrollmentdate: {
+    type: Date,
+    default: Date.now,
+},
+
 
 // Initialize nextId based on the highest existing ID
 let nextId = items.reduce((max, item) => (item.SKUid > max ? item.SKUid : max), 0) + 1;
