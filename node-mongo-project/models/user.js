@@ -8,9 +8,48 @@ const UserSchema = new mongoose.Schema({
     UserEmail: {
         type: String,
         required: true,
-        unique: true, // Added for uniqueness
+        unique: true,
+        match: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, // Optimized email validation
+    },
+    UserPassword: {
+        type: String,
+        minlength: 6, // Minimum password length
     },
     Enrollmentdate: {
+        type: Date,
+        default: Date.now,
+    },
+    UserAddress: {
+        street: {
+            type: String
+        },
+        city: {
+            type: String
+        },
+        state: {
+            type: String
+        },
+        zip: {
+            type: String
+        },
+        country: {
+            type: String
+        },
+    },
+    UserRole: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: 'user',
+    },
+    UserPhoneNumber: {
+        type: String,
+        match: /^(?:\+852|852)?[569]\d{7}$/, // Hong Kong phone number pattern
+    },
+    UserisVerified: {
+        type: Boolean,
+        default: false, // For email verification
+    },
+    UserCreatedAt: {
         type: Date,
         default: Date.now,
     },
