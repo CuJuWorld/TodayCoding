@@ -14,6 +14,12 @@ var items = [
     { "SKUid": 6, "ProductName": "Mac Pro 16", "slug": "MacPro16", "ProductCategory": "NoteBook", "USD": 1199, "InStockQuantity": 8 , "SupplierName": "S02", "ProductImageUrl": "/productimages/MacPro16.jpg", "ProductCreatedAt": "02-Feb-2025" },
 ];
 
+var suppliers = [
+    { "SupplierName": "S01", "SupplierDescription": "CellPhone", "SupplierEmail": "S01@gmail.com", "SupplierJoineddate": "01-Jan-2021" },
+    { "SupplierName": "S02", "SupplierDescription": "Notebook", "SupplierEmail": "S02@gmail.com", "SupplierJoineddate": "02-Feb-2022" },
+    { "SupplierName": "S03", "SupplierDescription": "DeskTop", "SupplierEmail": "S03@gmail.com", "SupplierJoineddate": "03-Mar-2023" },
+    { "SupplierName": "S04", "SupplierDescription": "SmartWatch", "SupplierEmail": "S04@gmail.com", "SupplierJoineddate": "04-Apr-2024" },
+];
 
 var customers = [
     { "UserName": "April CHAN", "UserEmail": "aprilchan@gmail.com", "Enrollmentdate": "02-Feb-2020" },
