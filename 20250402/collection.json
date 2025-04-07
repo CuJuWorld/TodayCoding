@@ -1,0 +1,227 @@
+{
+	"info": {
+		"_postman_id": "263f7f5e-b35f-4384-b149-a7b6c1ffb09e",
+		"name": "Node MongoDB Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9763707",
+		"_collection_link": "https://speeding-trinity-4468.postman.co/workspace/My-Teaching-Workspace~d01d239f-641f-4ed2-93cf-796c498018e4/collection/9763707-263f7f5e-b35f-4384-b149-a7b6c1ffb09e?action=share&source=collection_link&creator=9763707"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/67eb60ea41d792f7ac5ae4b5?name=67eb60ea41d792f7ac5ae4b5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"67eb60ea41d792f7ac5ae4b5"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "67eb60ea41d792f7ac5ae4b5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"sadsad\",\r\n    \"email\": \"sadsdsadsad@gmail.com\",\r\n    \"address\": {\r\n        \"street\": \"1\",\r\n        \"city\": \"1\",\r\n        \"state\": \"1\",\r\n        \"zip\": \"1\",\r\n        \"country\": \"1\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"sadsad\",\r\n    \"email\": \"sadsdsadsad@gmail.com\",\r\n    \"address\": {\r\n        \"street\": \"1\",\r\n        \"city\": \"1\",\r\n        \"state\": \"1\",\r\n        \"zip\": \"1\",\r\n        \"country\": \"1\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/67ecb08f66b05196c35201a9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"67ecb08f66b05196c35201a9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/67eb8ad7ddd11a5f9d53f264",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"67eb8ad7ddd11a5f9d53f264"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get Products",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/products/67ecbb1b66b05196c35201b0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"67ecbb1b66b05196c35201b0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"sadd22frr2d\",\r\n    \"decsription\": \"sadsad\",\r\n    \"slug\": \"sadddddasdx\",\r\n    \"category\": \"67ecbacc7126c2bce305f5a2\",\r\n    \"test\": \"dsadsa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"sadd22frr2d\",\r\n    \"decsription\": \"sadsad\",\r\n    \"slug\": \"sadddddasdx\",\r\n    \"category\": \"67ecbacc7126c2bce305f5a2\",\r\n    \"test\": \"dsadsa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

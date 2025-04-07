@@ -6,13 +6,14 @@ const app = express();
 app.use(bodyParser.json());
 
 var items = [
-    { "SKUid": 1, "ProductName": "iPhone 16e", "Category": "CellPhone", "USD": 499, "InStockQuantity": 15 , "SupplierName": "S01" },
-    { "SKUid": 2, "ProductName": "iPhone 16 Plus", "Category": "CellPhone", "USD": 699, "InStockQuantity": 5 , "SupplierName": "S01" },
-    { "SKUid": 3, "ProductName": "iPhone 16 Pro Max", "Category": "CellPhone", "USD": 899, "InStockQuantity": 10 , "SupplierName": "S01" },
-    { "SKUid": 4, "ProductName": "Mac_Air_15", "Category": "NoteBook", "USD": 999, "InStockQuantity": 20 , "SupplierName": "S02" },
-    { "SKUid": 5, "ProductName": "Mac_Pro_14", "Category": "NoteBook", "USD": 1099, "InStockQuantity": 12 , "SupplierName": "S02" },
-    { "SKUid": 6, "ProductName": "Mac Pro 16", "Category": "NoteBook", "USD": 1199, "InStockQuantity": 8 , "SupplierName": "S02"}
+    { "SKUid": 1, "ProductName": "iPhone 16e", "slug": "iPhone16e", "ProductCategory": "CellPhone", "USD": 499, "InStockQuantity": 15 , "SupplierName": "S01", "ProductImageUrl": "/productimages/iPhone16e.jpg", "ProductCreatedAt": "01-Jan-2025" },
+    { "SKUid": 2, "ProductName": "iPhone 16 Plus", "slug": "iPhone16Plus", "ProductCategory": "CellPhone", "USD": 699, "InStockQuantity": 5 , "SupplierName": "S01", "ProductImageUrl": "/productimages/iPhone16Plus.jpg", "ProductCreatedAt": "08-Aug-2024" },
+    { "SKUid": 3, "ProductName": "iPhone 16 Pro Max", "slug": "iPhone16ProMax", "ProductCategory": "CellPhone", "USD": 899, "InStockQuantity": 10 , "SupplierName": "S01", "ProductImageUrl": "/productimages/iPhone16ProMax.jpg", "ProductCreatedAt": "09-Sep-2024" },
+    { "SKUid": 4, "ProductName": "Mac Air 15", "slug": "MacAir15", "ProductCategory": "NoteBook", "USD": 999, "InStockQuantity": 20 , "SupplierName": "S02", "ProductImageUrl": "/productimages/MacAir15.jpg", "ProductCreatedAt": "10-Oct-2024" },
+    { "SKUid": 5, "ProductName": "Mac Pro 14", "slug": "MacPro14", "ProductCategory": "NoteBook", "USD": 1099, "InStockQuantity": 12 , "SupplierName": "S02", "ProductImageUrl": "/productimages/MacPro14.jpg", "ProductCreatedAt": "12-Dec-2023" },
+    { "SKUid": 6, "ProductName": "Mac Pro 16", "slug": "MacPro16", "ProductCategory": "NoteBook", "USD": 1199, "InStockQuantity": 8 , "SupplierName": "S02", "ProductImageUrl": "/productimages/MacPro16.jpg", "ProductCreatedAt": "02-Feb-2025" },
 ];
+
 
 var customers = [
     { "UserName": "April CHAN", "UserEmail": "aprilchan@gmail.com", "Enrollmentdate": "02-Feb-2020" },

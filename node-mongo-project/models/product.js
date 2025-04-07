@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const ProductSchema = new mongoose.Schema({
     SKUid: {
         type: Number,
@@ -10,12 +9,19 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    Category: {
+    slug: {
         type: String,
-        required: true,
-    },
+        required: true
+      },
+    ProductDescription: {
+        type: String
+      },
     USD: {
         type: Number,
+        required: true,
+    },
+    ProductCategory: {
+        type: String,
         required: true,
     },
     InStockQuantity: {
@@ -26,9 +32,14 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    ProductImageUrl: {
+        type: String
+      },
+    ProductCreatedAt: {
+        type: Date,
+        default: Date.now
+      },
 });
-
-
 module.exports = mongoose.model('Product', ProductSchema);
 // Here's a quick breakdown of the process:
 
