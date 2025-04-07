@@ -32,6 +32,10 @@ app.use('/products', productRoutes);       // Use user routes
 const supplierRoutes = require('./routes/supplier'); // Import user routes
 app.use('/suppliers', supplierRoutes);       // Use user routes
 
+const categoryRoutes = require('./routes/category'); // Import user routes
+app.use('/categories', categoryRoutes);
+
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
