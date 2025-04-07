@@ -15,7 +15,7 @@ const middleware = (app) => {
     // app.use('/api/items', itemRoutes); // Route all '/api/items' requests to the itemRoutes handler
 
     // Serve uploaded files from the 'public/uploads' directory
-    app.use('/productimages', express.static('public/productimages')); // Make the uploads directory accessible via the '/uploads' URL path
+    app.use('/productimages', express.static('productimages')); // Make the uploads directory accessible via the '/uploads' URL path
 };
 
 module.exports = middleware; // Export the middleware function

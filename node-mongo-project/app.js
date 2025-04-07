@@ -1,23 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
+const middleware = require('./middleware'); // Import the middleware configuration
+const path = require('path'); // Import the path module for handling file paths
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000; // Set the port to listen on
 
 // Middleware
 app.use(bodyParser.json());
-/* 
-  useNewUrlParser: A better way to read the connection address.
-  useUnifiedTopology: A simpler and more reliable way to manage connections.
-MongoDB connection
-mongoose.connect('mongodb://localhost:27017/20250331_db', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-.then(() => console.log('MongoDB connected...'))
-.catch((err) => console.log('MongoDB connection error:', err));
-*/
+// Use the middleware for the Express application
+middleware(app); // Call the middleware function, passing the app instance
+
+
+// Connect to the database
+connectDB(); // Call the function to establish a connection to the MongoDB database
 
 mongoose.connect('mongodb://localhost:27017/20250331_db')
   .then(() => console.log('MongoDB connected...'))
