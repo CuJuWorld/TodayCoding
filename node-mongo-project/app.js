@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const app = express(); // Create an instance of an Express application
-const PORT = process.env.PORT || 3000; // Set the port to listen on
+const port = process.env.PORT || 3000; // Set the port to listen on
 
 const middleware = require('./middleware'); // Import the middleware configuration
 const path = require('path'); // Import the path module for handling file paths
@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 
 // Connect to the database
-connectDB(); // Call the function to establish a connection to the MongoDB database
+// connectDB(); // Call the function to establish a connection to the MongoDB database
 
 
 mongoose.connect('mongodb://localhost:27017/20250331_db')
