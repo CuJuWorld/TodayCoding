@@ -15,10 +15,10 @@ var items = [
 ];
 
 var suppliers = [
-    { "SupplierName": "S01", "SupplierDescription": "CellPhone", "SupplierEmail": "S01@gmail.com", "SupplierJoineddate": "01-Jan-2021" },
-    { "SupplierName": "S02", "SupplierDescription": "Notebook", "SupplierEmail": "S02@gmail.com", "SupplierJoineddate": "02-Feb-2022" },
-    { "SupplierName": "S03", "SupplierDescription": "DeskTop", "SupplierEmail": "S03@gmail.com", "SupplierJoineddate": "03-Mar-2023" },
-    { "SupplierName": "S04", "SupplierDescription": "SmartWatch", "SupplierEmail": "S04@gmail.com", "SupplierJoineddate": "04-Apr-2024" },
+    { "SupplierName": "S01", "SupplierDescription": "S01 HK Limited", "SupplierEmail": "S01@gmail.com", "SupplierJoineddate": "01-Jan-2021" },
+    { "SupplierName": "S02", "SupplierDescription": "S02 Great Bay Area Limited", "SupplierEmail": "S02@gmail.com", "SupplierJoineddate": "02-Feb-2022" },
+    { "SupplierName": "S03", "SupplierDescription": "S03 China Limited", "SupplierEmail": "S03@gmail.com", "SupplierJoineddate": "03-Mar-2023" },
+    { "SupplierName": "S04", "SupplierDescription": "S04 Asia Limited", "SupplierEmail": "S04@gmail.com", "SupplierJoineddate": "04-Apr-2024" },
 ];
 
 var customers = [
