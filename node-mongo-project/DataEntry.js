@@ -22,12 +22,12 @@ var suppliers = [
 ];
 
 var customers = [
-    { "UserName": "April CHAN", "UserEmail": "aprilchan@gmail.com", "Enrollmentdate": "02-Feb-2020" },
-    { "UserName": "Bonita CHEUNG", "UserEmail": "BonitaCHEUNG@gmail.com", "Enrollmentdate": "03-Mar-2020" },
-    { "UserName": "Ceci KWAN", "UserEmail": "CeciKWAN@gmail.com", "Enrollmentdate": "04-Apr-2020"  },
-    { "UserName": "DiDi LEE", "UserEmail": "DiDiLEE@gmail.com", "Enrollmentdate": "05-May-2020" },
-    {  "UserName": "Elis MA", "UserEmail": "ElisMA@gmail.com", "Enrollmentdate": "06-Jun-2020"  },
-    { "UserName": "Fiona YUA", "UserEmail": "FionaYUA@gmail.com", "Enrollmentdate": "07-Jul-2020" }
+    { "UserName": "April CHAN", "UserEmail": "aprilchan@gmail.com", "userpassword": 123456, "Enrollmentdate": "02-Feb-2020", "UserAddress" : { "Street": "123456 Main St", "City": "Hong Kong", "State": "HK", "Zip": "12345", "Country": "China" }, "UserRole": "user", "UserPhoneNumber": "+85212345678", "UserisVerified": false, "UsercreatedAt" : "01-Jan-2024" },
+    { "UserName": "Bonita CHEUNG", "UserEmail": "BonitaCHEUNG@gmail.com", "userpassword": 222222, "Enrollmentdate": "03-Mar-2020" }, "UserAddress" : { "Street": "222222 Main St", "City": "Hong Kong", "State": "HK", "Zip": "12345", "Country": "China" }, "UserRole": "user", "UserPhoneNumber": "+85212345678", "UserisVerified": false, "UsercreatedAt" : "01-Jan-2024" },  
+    { "UserName": "Ceci KWAN", "UserEmail": "CeciKWAN@gmail.com", "userpassword": 333333, "Enrollmentdate": "04-Apr-2020" }, "UserAddress" : { "Street": "333333 Main St", "City": "Hong Kong", "State": "HK", "Zip": "12345", "Country": "China" }, "UserRole": "user", "UserPhoneNumber": "+85212345678", "UserisVerified": false, "UsercreatedAt" : "01-Jan-2024" },
+    { "UserName": "DiDi LEE", "UserEmail": "DiDiLEE@gmail.com", "userpassword": 444444, "Enrollmentdate": "05-May-2020" }, "UserAddress" : { "Street": "444444 Main St", "City": "Hong Kong", "State": "HK", "Zip": "12345", "Country": "China" }, "UserRole": "user", "UserPhoneNumber": "+85212345678", "UserisVerified": false, "UsercreatedAt" : "01-Jan-2024" },
+    { "UserName": "Elis MA", "UserEmail": "ElisMA@gmail.com", "userpassword": 555555, "Enrollmentdate": "06-Jun-2020" }, "UserAddress" : { "Street": "555555 Main St", "City": "Hong Kong", "State": "HK", "Zip": "12345", "Country": "China" }, "UserRole": "user", "UserPhoneNumber": "+85212345678", "UserisVerified": false, "UsercreatedAt" : "01-Jan-2024" },
+    { "UserName": "Fiona YUA", "UserEmail": "FionaYUA@gmail.com", "userpassword": 6666666, "Enrollmentdate": "07-Jul-2020" },  "UserAddress" : { "Street": "666666 Main St", "City": "Hong Kong", "State": "HK", "Zip": "12345", "Country": "China" }, "UserRole": "user", "UserPhoneNumber": "+85212345678", "UserisVerified": false, "UsercreatedAt" : "01-Jan-2024" }, 
 ];
 /*
 var customers = [
