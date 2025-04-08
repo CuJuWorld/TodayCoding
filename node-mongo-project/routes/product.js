@@ -64,26 +64,35 @@ const validateInteger = (InStockQuantity) => {
 }
   
 
-// Create a new user
+// Create a new product
 router.post('/', async (req, res) => {
-    const { ProductName, USD, InStockQuantity} = req.body;
-    if(!ProductName) res.status(400).json({ message: "Missing ProductName field" });
-    if(!USD) res.status(400).json({ message: "Missing price field" });
-    if(!InStockQuantity) res.status(400).json({ message: "Missing InStock field" });
-/*
-    const duplicatedEmail = await Product.findOne( { USD: USD }) ? true: false;
-    if(duplicatedEmail) res.status(400).json({ message: "duplicated email field. Please enter another email address" });
-*/
-    if(!validateUSD(USD)) res.status(400).json({ message: "invalid USD field" });
-    if(!validateInteger(InStockQuantity)) res.status(400).json({ message: "invalid InStockQuantity field" });
+    const { SKUid, ProductName, slug, ProductDescription, USD, ProductCategory, InStockQuantity, SupplierName, ProductImageUrl } = req.body;
+
+    if (!SKUid) return res.status(400).json({ message: "Missing SKUid field" });
+    if (!ProductName) return res.status(400).json({ message: "Missing ProductName field" });
+    if (!slug) return res.status(400).json({ message: "Missing slug field" });
+    if (!USD) return res.status(400).json({ message: "Missing USD field" });
+    if (!ProductCategory) return res.status(400).json({ message: "Missing ProductCategory field" });
+    if (!InStockQuantity) return res.status(400).json({ message: "Missing InStockQuantity field" });
+    if (!SupplierName) return res.status(400).json({ message: "Missing SupplierName field" });
+
+    if (!validateUSD(USD)) return res.status(400).json({ message: "Invalid USD field" });
+    if (!validateInteger(InStockQuantity)) return res.status(400).json({ message: "Invalid InStockQuantity field" });
+
     const product = new Product({
+        SKUid,
         ProductName,
+        slug,
+        ProductDescription,
         USD,
-        InStockQuantity
+        ProductCategory,
+        InStockQuantity,
+        SupplierName,
+        ProductImageUrl
     });
 
     try {
-        const newProduct = await product.save(); // create users collection
+        const newProduct = await product.save();
         res.status(201).json(newProduct);
     } catch (err) {
         res.status(400).json({ message: err.message });
@@ -91,21 +100,25 @@ router.post('/', async (req, res) => {
 });
 
 
-// Update a user by ID
+// Update a product by ID
 router.put('/:id', async (req, res) => {
     try {
-        let product;
-        const { ProductName, USD } = req.body;
-        try {
-            product = await Product.findById(req.params.id);
-            if(!product) res.status(404).json({ message: 'Product not found' });
-        } catch (err) {
-            res.status(404).json({ message: 'Product not found' });
-        }
+        const { SKUid, ProductName, slug, ProductDescription, USD, ProductCategory, InStockQuantity, SupplierName, ProductImageUrl } = req.body;
+        let product = await Product.findById(req.params.id);
 
+        if (!product) return res.status(404).json({ message: 'Product not found' });
+
+        if (SKUid) product.SKUid = SKUid;
         if (ProductName) product.ProductName = ProductName;
+        if (slug) product.slug = slug;
+        if (ProductDescription) product.ProductDescription = ProductDescription;
         if (USD) product.USD = USD;
-        product = await product.save(); // update users collection
+        if (ProductCategory) product.ProductCategory = ProductCategory;
+        if (InStockQuantity) product.InStockQuantity = InStockQuantity;
+        if (SupplierName) product.SupplierName = SupplierName;
+        if (ProductImageUrl) product.ProductImageUrl = ProductImageUrl;
+
+        product = await product.save();
         res.json(product);
     } catch (err) {
         res.status(400).json({ message: err.message });
