@@ -23,8 +23,6 @@ mongoose.connect('mongodb://localhost:27017/20250331_db')
 
 
 // Define Routes (before starting the server)
-const userRoutes = require('./routes/user'); // Import user routes
-app.use('/users', userRoutes);       // Use user routes
 
 const productRoutes = require('./routes/product'); // Import user routes
 app.use('/products', productRoutes);       // Use user routes
@@ -35,6 +33,11 @@ app.use('/suppliers', supplierRoutes);       // Use user routes
 const categoryRoutes = require('./routes/category'); // Import user routes
 app.use('/categories', categoryRoutes);
 
+const userRoutes = require('./routes/user'); // Import user routes
+app.use('/users', userRoutes);       // Use user routes
+
+const userRoutes = require('./routes/order'); // Import user routes
+app.use('/orders', userRoutes);       // Use user routes
 
 // Start the server
 app.listen(port, () => {
