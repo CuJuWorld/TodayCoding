@@ -6,31 +6,34 @@ const orderSchema = new mongoose.Schema({
     ref: 'User', // Assuming you have a User model
     required: true,
   },
-  products: [{
-    product: {
+  OrderItems: [{ // Renamed from 'products' to 'OrderItems'
+    productId: { // Renamed from 'product' to 'productId'
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Product',
+      required: true,
+    },
+    USD: { // Added from Product model
+      type: Number,
       required: true,
     },
     quantity: {
       type: Number,
       required: true,
     },
-
   }],
-  amount: {
+  TotalAmount: { // Renamed from 'amount' to 'totalAmount'
     type: Number,
     required: true,
   },
-  orderDate: {
+  OrderDate: {
     type: Date,
     default: Date.now,
   },
-  code: {
+  PromotionCode: { // Renamed from 'code' to 'PromotionCode'
     type: String,
     required: true,
   },
-  status: {
+  OrderStatus: { // Renamed from 'status' to 'orderStatus'
     type: String,
     enum: ['pending', 'completed', 'refunded', 'delivered', 'canceled'],
     default: 'pending',
