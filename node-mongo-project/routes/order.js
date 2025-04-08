@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../models/order'); // Import the Order model
+const Product = require('../models/product'); // Import the Product model
 const mongoose = require('mongoose');
 
 // Get all orders
 router.get('/', async (req, res) => {
     try {
-        const orders = await Order.find();
+        const orders = await Order.find().populate('user').populate('OrderItems.productId'); // Populate user and product details
         res.json(orders);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -21,7 +22,7 @@ router.get('/:id', async (req, res) => {
         // Check if the ID is a valid ObjectId
         if (!mongoose.isValidObjectId(id)) return res.status(400).json({ message: 'Invalid Order ID format' });
 
-        const order = await Order.findById(id);
+        const order = await Order.findById(id).populate('user').populate('OrderItems.productId'); // Populate user and product details
         if (!order) return res.status(404).json({ message: 'Order not found' });
 
         res.json(order);
@@ -31,39 +32,32 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-async function validateOrderData(userId, products) {
+async function validateOrderData(userId, orderItems) {
     const errors = [];
 
     // Validate user if provided
     if (userId) {
-        const userRecord = await User.findById(userId);
+        const userRecord = await mongoose.model('User').findById(userId); // Assuming User model exists
         if (!userRecord) {
             errors.push({ status: 404, message: `User (${userId}) not found` });
         }
     }
 
-    // Validate products
-    const productIds = products ? products.map(item => item.product) : [];
-    // productIds = [1,3,45,66]
+    // Validate order items
+    const productIds = orderItems ? orderItems.map(item => item.productId) : [];
     const fetchedProducts = await Product.find({ _id: { $in: productIds } });
-    // fetchedProducts = [{_id : 1, name: 'aa'}, {_id : 3, name: 'aa'}, {_id : 45, name: 'aa'}, {_id : 66, name: 'aa'}]
-    // Create a map for quick lookups
+
     const productMap = fetchedProducts.reduce((map, product) => {
         map[product._id.toString()] = product;
         return map;
     }, {});
-    // productMap['1'] =  {_id : 1, name: 'aa'}
-    // productMap['3'] =  {_id : 3, name: 'aa'}
-    // productMap['45'] =  {_id : 45, name: 'aa'}
-    // productMap['66'] =  {_id : 66, name: 'aa'}
 
-    // Check if all products exist and validate quantities
-    for (const item of products) {
-        const product = productMap[item.product];
+    for (const item of orderItems) {
+        const product = productMap[item.productId];
         if (!product) {
-            errors.push({ status: 404, message: `Product ${item.product} not found` });
-        } else if (item.quantity > product.stock) {
-            errors.push({ status: 400, message: `Not enough stock for product ${item.product}` });
+            errors.push({ status: 404, message: `Product ${item.productId} not found` });
+        } else if (item.quantity > product.InStockQuantity) {
+            errors.push({ status: 400, message: `Not enough stock for product ${item.productId}` });
         }
     }
 
@@ -73,10 +67,10 @@ async function validateOrderData(userId, products) {
 // Create an Order
 router.post('/', async (req, res) => {
     try {
-        const { user, products, status, totalAmount } = req.body; // Assuming new fields like 'status' and 'totalAmount'
+        const { user, OrderItems, PromotionCode, TotalAmount, OrderStatus } = req.body;
 
         // Validate order data
-        const errors = await validateOrderData(user, products);
+        const errors = await validateOrderData(user, OrderItems);
         if (errors.length > 0) {
             return res.status(400).json({ messages: errors });
         }
@@ -84,10 +78,11 @@ router.post('/', async (req, res) => {
         // Create the new order
         const newOrder = new Order({
             user,
-            products,
-            status, // New field
-            totalAmount, // New field
-            createdAt: new Date(), // Assuming 'createdAt' is part of the schema
+            OrderItems,
+            PromotionCode,
+            TotalAmount,
+            OrderStatus,
+            OrderDate: new Date(),
         });
 
         const savedOrder = await newOrder.save();
@@ -98,28 +93,28 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Update a order by slug
-router.put('/:code', async (req, res) => {
+// Update an order by PromotionCode
+router.put('/:PromotionCode', async (req, res) => {
     try {
-        const { code } = req.params;
-        const { user, products, status, totalAmount, ...updateFields } = req.body;
+        const { PromotionCode } = req.params;
+        const { user, OrderItems, TotalAmount, OrderStatus, ...updateFields } = req.body;
 
         // Validate order data
-        const errors = await validateOrderData(user, products);
+        const errors = await validateOrderData(user, OrderItems);
         if (errors.length > 0) {
             return res.status(400).json({ messages: errors });
         }
 
         // Check if the order exists
-        let order = await Order.findOne({ code });
+        let order = await Order.findOne({ PromotionCode });
         if (!order) {
-            return res.status(404).json({ message: `Order (${code}) not found` });
+            return res.status(404).json({ message: `Order with PromotionCode (${PromotionCode}) not found` });
         }
 
         // Update the existing order
         order = await Order.findOneAndUpdate(
-            { code },
-            { ...updateFields, products, user, status, totalAmount }, // Include new fields
+            { PromotionCode },
+            { ...updateFields, user, OrderItems, TotalAmount, OrderStatus },
             { new: true, runValidators: true }
         );
 
@@ -130,7 +125,7 @@ router.put('/:code', async (req, res) => {
     }
 });
 
-// Delete a order by ID
+// Delete an order by ID
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
