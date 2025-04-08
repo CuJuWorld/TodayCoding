@@ -66,14 +66,14 @@ async function validateOrderData(userId, products) {
             errors.push({ status: 400, message: `Not enough stock for product ${item.product}` });
         }
     }
-—
+
     return errors;
 }
 
 // Create an Order
 router.post('/', async (req, res) => {
     try {
-        const { user, products } = req.body;
+        const { user, products, status, totalAmount } = req.body; // Assuming new fields like 'status' and 'totalAmount'
 
         // Validate order data
         const errors = await validateOrderData(user, products);
@@ -83,9 +83,11 @@ router.post('/', async (req, res) => {
 
         // Create the new order
         const newOrder = new Order({
-            user: user,
+            user,
             products,
-            // Include any additional fields here
+            status, // New field
+            totalAmount, // New field
+            createdAt: new Date(), // Assuming 'createdAt' is part of the schema
         });
 
         const savedOrder = await newOrder.save();
@@ -100,7 +102,7 @@ router.post('/', async (req, res) => {
 router.put('/:code', async (req, res) => {
     try {
         const { code } = req.params;
-        const { user, products, ...updateFields } = req.body;
+        const { user, products, status, totalAmount, ...updateFields } = req.body;
 
         // Validate order data
         const errors = await validateOrderData(user, products);
@@ -114,15 +116,12 @@ router.put('/:code', async (req, res) => {
             return res.status(404).json({ message: `Order (${code}) not found` });
         }
 
-
         // Update the existing order
         order = await Order.findOneAndUpdate(
             { code },
-            { ...updateFields, products, user },
+            { ...updateFields, products, user, status, totalAmount }, // Include new fields
             { new: true, runValidators: true }
         );
-        // new: true gives you the updated document.
-        // runValidators: true checks that the updates comply with your schema's validation rules.
 
         res.status(200).json(order);
     } catch (err) {
