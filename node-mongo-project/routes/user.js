@@ -55,10 +55,10 @@ const validateEmail = (UserEmail) => {
 
 // Create a new user
 router.post('/', async (req, res) => {
-    const { UserName, UserEmail, address} = req.body;
+    const { UserName, UserEmail, UserAddress } = req.body; // Updated to UserAddress
     if(!UserName) res.status(400).json({ message: "Missing UserName field" });
     if(!UserEmail) res.status(400).json({ message: "Missing UserEmail field" });
-    if(!address) res.status(400).json({ message: "Missing address field" });
+    if(!UserAddress) res.status(400).json({ message: "Missing UserAddress field" });
 
     const duplicatedEmail = await User.findOne( { UserEmail: UserEmail }) ? true: false;
     if(duplicatedEmail) res.status(400).json({ message: "duplicated UserEmail field. Please enter another UserEmail address" });
@@ -67,7 +67,7 @@ router.post('/', async (req, res) => {
     const user = new User({
         UserName,
         UserEmail,
-        address
+        UserAddress // Updated to UserAddress
     });
 
     try {

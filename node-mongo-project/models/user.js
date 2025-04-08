@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    UserAddress: {
+    UserAddress: { // Reverted from address to UserAddress
         street: {
             type: String
         },
