@@ -14,6 +14,12 @@ var items = [
     { "SKUid": 6, "ProductName": "Mac Pro 16", "slug": "MacPro16", "ProductCategory": "NoteBook", "USD": 1199, "InStockQuantity": 8 , "SupplierName": "S02", "ProductImageUrl": "/productimages/MacPro16.jpg", "ProductCreatedAt": "02-Feb-2025" },
 ];
 
+var category = [
+    { "CategoryName": "CellPhone", "CategoryDescription": "Mobile Phone", "CategoryCreatedAt:": "01-Jan-2021" },
+    { "CategoryName": "NoteBook", "CategoryDescription": "Computer", "CategoryCreatedAt:": "02-Feb-2022" },
+    { "CategoryName": "SmartWatch", "CategoryDescription": "Wearable IoT", "CategoryCreatedAt:": "03-Mar-2023" },
+    { "CategoryName": "27inchesLED", "CategoryDescription": "Display", "CategoryCreatedAt:": "04-Apr-2024" },
+  ];
 var suppliers = [
     { "SupplierName": "S01", "SupplierDescription": "S01 HK Limited", "SupplierEmail": "S01@gmail.com", "SupplierJoineddate": "01-Jan-2021" },
     { "SupplierName": "S02", "SupplierDescription": "S02 Great Bay Area Limited", "SupplierEmail": "S02@gmail.com", "SupplierJoineddate": "02-Feb-2022" },
