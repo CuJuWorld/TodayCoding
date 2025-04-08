@@ -21,14 +21,112 @@ var suppliers = [
     { "SupplierName": "S04", "SupplierDescription": "S04 Asia Limited", "SupplierEmail": "S04@gmail.com", "SupplierJoineddate": "04-Apr-2024" },
 ];
 
-var customers = [
-    { "UserName": "April CHAN", "UserEmail": "aprilchan@gmail.com", "userpassword": 123456, "Enrollmentdate": "02-Feb-2020", "UserAddress" : { "Street": "123456 Nathan Road", "City": "TST", "State": "HKG", "Zip": "00000", "Country": "HONG KONG SAR" }, "UserRole": "admin", "UserPhoneNumber": "+85291111111", "UserisVerified": false, "UsercreatedAt" : "01-Jan-2024" },
-    { "UserName": "Bonita CHEUNG", "UserEmail": "BonitaCHEUNG@gmail.com", "userpassword": 222222, "Enrollmentdate": "03-Mar-2020" }, "UserAddress" : { "Street": "2 Main St", "City": "Guangzhou City", "State": "GZ", "Zip": "12345", "Country": "China" }, "UserRole": "user", "UserPhoneNumber": "+8618188284212", "UserisVerified": false, "UsercreatedAt" : "01-Jan-2024" },  
-    { "UserName": "Ceci KWAN", "UserEmail": "CeciKWAN@gmail.com", "userpassword": 333333, "Enrollmentdate": "04-Apr-2020" }, "UserAddress" : { "Street": "13 Main St", "City": "Guangzhou City", "State": "GZ", "Zip": "12345", "Country": "China" }, "UserRole": "user", "UserPhoneNumber": "+8618188284223", "UserisVerified": false, "UsercreatedAt" : "01-Jan-2024" },
-    { "UserName": "DiDi LEE", "UserEmail": "DiDiLEE@gmail.com", "userpassword": 444444, "Enrollmentdate": "05-May-2020" }, "UserAddress" : { "Street": "24 Main St", "City": "Guangzhou City", "State": "GZ", "Zip": "12345", "Country": "China" }, "UserRole": "user", "UserPhoneNumber": "+8618188284234", "UserisVerified": false, "UsercreatedAt" : "01-Jan-2024" },
-    { "UserName": "Elis MA", "UserEmail": "ElisMA@gmail.com", "userpassword": 555555, "Enrollmentdate": "06-Jun-2020" }, "UserAddress" : { "Street": "35 Main St", "City": "Guangzhou City", "State": "GZ", "Zip": "12345", "Country": "China" }, "UserRole": "user", "UserPhoneNumber": "+8618188284245", "UserisVerified": false, "UsercreatedAt" : "01-Jan-2024" },
-    { "UserName": "Fiona YUA", "UserEmail": "FionaYUA@gmail.com", "userpassword": 6666666, "Enrollmentdate": "07-Jul-2020" },  "UserAddress" : { "Street": "46 Main St", "City": "Guangzhou City", "State": "GZ", "Zip": "12345", "Country": "China" }, "UserRole": "user", "UserPhoneNumber": "+8618188284256", "UserisVerified": false, "UsercreatedAt" : "01-Jan-2024" }, 
-];
+var customers = 
+[
+    {
+      "UserName": "April CHAN",
+      "UserEmail": "aprilchan@gmail.com",
+      "UserPassword": "123456",
+      "Enrollmentdate": "02-Feb-2020",
+      "UserAddress": {
+        "street": "123456 Nathan Road",
+        "city": "TST",
+        "state": "HKG",
+        "zip": "00000",
+        "country": "HONG KONG SAR"
+      },
+      "UserRole": "admin",
+      "UserPhoneNumber": "+85291111111",
+      "UserisVerified": true,
+      "UserCreatedAt": "01-Jan-2024"
+    },
+    {
+      "UserName": "Bonita CHEUNG",
+      "UserEmail": "BonitaCHEUNG@gmail.com",
+      "UserPassword": "222222",
+      "Enrollmentdate": "03-Mar-2020",
+      "UserAddress": {
+        "street": "2 Main St",
+        "city": "Guangzhou City",
+        "state": "GZ",
+        "zip": "12345",
+        "country": "China"
+      },
+      "UserRole": "user",
+      "UserPhoneNumber": "+8618188284212",
+      "UserisVerified": false,
+      "UserCreatedAt": "02-Feb-2024"
+    },
+    {
+      "UserName": "Ceci KWAN",
+      "UserEmail": "CeciKWAN@gmail.com",
+      "UserPassword": "333333",
+      "Enrollmentdate": "04-Apr-2020",
+      "UserAddress": {
+        "street": "13 Main St",
+        "city": "Guangzhou City",
+        "state": "GZ",
+        "zip": "12345",
+        "country": "China"
+      },
+      "UserRole": "user",
+      "UserPhoneNumber": "+8618188284223",
+      "UserisVerified": false,
+      "UserCreatedAt": "03-Mar-2024"
+    },
+    {
+      "UserName": "DiDi LEE",
+      "UserEmail": "DiDiLEE@gmail.com",
+      "UserPassword": "444444",
+      "Enrollmentdate": "05-May-2020",
+      "UserAddress": {
+        "street": "24 Main St",
+        "city": "Guangzhou City",
+        "state": "GZ",
+        "zip": "12345",
+        "country": "China"
+      },
+      "UserRole": "user",
+      "UserPhoneNumber": "+8618188284234",
+      "UserisVerified": false,
+      "UserCreatedAt": "04-Apr-2024"
+    },
+    {
+      "UserName": "Elis MA",
+      "UserEmail": "ElisMA@gmail.com",
+      "UserPassword": "555555",
+      "Enrollmentdate": "06-Jun-2020",
+      "UserAddress": {
+        "street": "35 Main St",
+        "city": "Guangzhou City",
+        "state": "GZ",
+        "zip": "12345",
+        "country": "China"
+      },
+      "UserRole": "user",
+      "UserPhoneNumber": "+8618188284245",
+      "UserisVerified": false,
+      "UserCreatedAt": "05-May-2024"
+    },
+    {
+      "UserName": "Fiona YUA",
+      "UserEmail": "FionaYUA@gmail.com",
+      "UserPassword": "6666666",
+      "Enrollmentdate": "07-Jul-2020",
+      "UserAddress": {
+        "street": "46 Main St",
+        "city": "Guangzhou City",
+        "state": "GZ",
+        "zip": "12345",
+        "country": "China"
+      },
+      "UserRole": "user",
+      "UserPhoneNumber": "+8618188284256",
+      "UserisVerified": false,
+      "UserCreatedAt": "06-Jun-2024"
+    }
+  ]
+;
 /*
 var customers = [
     { "Cid": 1, "UserName": "April CHAN", "UserEmail": "aprilchan@gmail.com", "Enrollmentdate": "02-Feb-2020" },

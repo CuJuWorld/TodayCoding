@@ -43,7 +43,7 @@ const UserSchema = new mongoose.Schema({
     },
     UserPhoneNumber: {
         type: String,
-        match: /^(?:\+852|852)?[569]\d{7}$/, // Hong Kong phone number pattern
+        match: /^(?:\+852[569]\d{7}|\+861[0-9]{10})$/, // Hong Kong or Mainland China phone number pattern
     },
     UserisVerified: {
         type: Boolean,
