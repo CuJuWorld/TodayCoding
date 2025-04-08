@@ -1,0 +1,32 @@
+[{
+  "_id": {
+    "$oid": "67f399531f7b95860c3bb2d6"
+  },
+  "CategoryName": "CellPhone",
+  "CategoryDescription": "Mobile Phone",
+  "CategoryCreatedAt:": "01-Jan-2021"
+},
+{
+  "_id": {
+    "$oid": "67f399531f7b95860c3bb2d7"
+  },
+  "CategoryName": "NoteBook",
+  "CategoryDescription": "Computer",
+  "CategoryCreatedAt:": "02-Feb-2022"
+},
+{
+  "_id": {
+    "$oid": "67f399531f7b95860c3bb2d8"
+  },
+  "CategoryName": "SmartWatch",
+  "CategoryDescription": "Wearable IoT",
+  "CategoryCreatedAt:": "03-Mar-2023"
+},
+{
+  "_id": {
+    "$oid": "67f399531f7b95860c3bb2d9"
+  },
+  "CategoryName": "27inchesLED",
+  "CategoryDescription": "Display",
+  "CategoryCreatedAt:": "04-Apr-2024"
+}]

@@ -1,0 +1,13 @@
+[
+    {
+        "user":"67f4cccac047d6edc7ace234",
+        "OrderItems": [{ 
+            "productId": "67f35a2a1f7b95860c3bb271",
+            "quantity": 2,
+            "USD": 499
+        }],
+        "TotalAmount":12, 
+        "PromotionCode": "",
+        "OrderStatus": "pending"
+    }
+]

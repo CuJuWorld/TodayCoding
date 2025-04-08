@@ -1,0 +1,84 @@
+[{
+  "_id": {
+    "$oid": "67f35a2a1f7b95860c3bb271"
+  },
+  "SKUid": 1,
+  "ProductName": "iPhone 16e",
+  "slug": "iPhone16e",
+  "ProductCategory": "CellPhone",
+  "USD": 499,
+  "InStockQuantity": 15,
+  "SupplierName": "S01",
+  "ProductImageUrl": "/productimages/iPhone16e.jpg",
+  "ProductCreatedAt": "01-Jan-2025"
+},
+{
+  "_id": {
+    "$oid": "67f35a2a1f7b95860c3bb272"
+  },
+  "SKUid": 2,
+  "ProductName": "iPhone 16 Plus",
+  "slug": "iPhone16Plus",
+  "ProductCategory": "CellPhone",
+  "USD": 699,
+  "InStockQuantity": 5,
+  "SupplierName": "S01",
+  "ProductImageUrl": "/productimages/iPhone16Plus.jpg",
+  "ProductCreatedAt": "08-Aug-2024"
+},
+{
+  "_id": {
+    "$oid": "67f35a2a1f7b95860c3bb273"
+  },
+  "SKUid": 3,
+  "ProductName": "iPhone 16 Pro Max",
+  "slug": "iPhone16ProMax",
+  "ProductCategory": "CellPhone",
+  "USD": 899,
+  "InStockQuantity": 10,
+  "SupplierName": "S01",
+  "ProductImageUrl": "/productimages/iPhone16ProMax.jpg",
+  "ProductCreatedAt": "09-Sep-2024"
+},
+{
+  "_id": {
+    "$oid": "67f35a2a1f7b95860c3bb274"
+  },
+  "SKUid": 4,
+  "ProductName": "Mac Air 15",
+  "slug": "MacAir15",
+  "ProductCategory": "NoteBook",
+  "USD": 999,
+  "InStockQuantity": 20,
+  "SupplierName": "S02",
+  "ProductImageUrl": "/productimages/MacAir15.jpg",
+  "ProductCreatedAt": "10-Oct-2024"
+},
+{
+  "_id": {
+    "$oid": "67f35a2a1f7b95860c3bb275"
+  },
+  "SKUid": 5,
+  "ProductName": "Mac Pro 14",
+  "slug": "MacPro14",
+  "ProductCategory": "NoteBook",
+  "USD": 1099,
+  "InStockQuantity": 12,
+  "SupplierName": "S02",
+  "ProductImageUrl": "/productimages/MacPro14.jpg",
+  "ProductCreatedAt": "12-Dec-2023"
+},
+{
+  "_id": {
+    "$oid": "67f35a2a1f7b95860c3bb276"
+  },
+  "SKUid": 6,
+  "ProductName": "Mac Pro 16",
+  "slug": "MacPro16",
+  "ProductCategory": "NoteBook",
+  "USD": 1199,
+  "InStockQuantity": 8,
+  "SupplierName": "S02",
+  "ProductImageUrl": "/productimages/MacPro16.jpg",
+  "ProductCreatedAt": "02-Feb-2025"
+}]

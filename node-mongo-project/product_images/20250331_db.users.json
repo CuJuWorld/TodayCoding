@@ -1,0 +1,120 @@
+[{
+  "_id": {
+    "$oid": "67f4cccac047d6edc7ace234"
+  },
+  "UserName": "April CHAN",
+  "UserEmail": "aprilchan@gmail.com",
+  "UserPassword": "123456",
+  "Enrollmentdate": "02-Feb-2020",
+  "UserAddress": {
+    "street": "123456 Nathan Road",
+    "city": "TST",
+    "state": "HKG",
+    "zip": "00000",
+    "country": "HONG KONG SAR"
+  },
+  "UserRole": "admin",
+  "UserPhoneNumber": "+85291111111",
+  "UserisVerified": true,
+  "UserCreatedAt": "01-Jan-2024"
+},
+{
+  "_id": {
+    "$oid": "67f4cccac047d6edc7ace235"
+  },
+  "UserName": "Bonita CHEUNG",
+  "UserEmail": "BonitaCHEUNG@gmail.com",
+  "UserPassword": "222222",
+  "Enrollmentdate": "03-Mar-2020",
+  "UserAddress": {
+    "street": "2 Main St",
+    "city": "Guangzhou City",
+    "state": "GZ",
+    "zip": "12345",
+    "country": "China"
+  },
+  "UserRole": "user",
+  "UserPhoneNumber": "+8618188284212",
+  "UserisVerified": false,
+  "UserCreatedAt": "02-Feb-2024"
+},
+{
+  "_id": {
+    "$oid": "67f4cccac047d6edc7ace236"
+  },
+  "UserName": "Ceci KWAN",
+  "UserEmail": "CeciKWAN@gmail.com",
+  "UserPassword": "333333",
+  "Enrollmentdate": "04-Apr-2020",
+  "UserAddress": {
+    "street": "13 Main St",
+    "city": "Guangzhou City",
+    "state": "GZ",
+    "zip": "12345",
+    "country": "China"
+  },
+  "UserRole": "user",
+  "UserPhoneNumber": "+8618188284223",
+  "UserisVerified": false,
+  "UserCreatedAt": "03-Mar-2024"
+},
+{
+  "_id": {
+    "$oid": "67f4cccac047d6edc7ace237"
+  },
+  "UserName": "DiDi LEE",
+  "UserEmail": "DiDiLEE@gmail.com",
+  "UserPassword": "444444",
+  "Enrollmentdate": "05-May-2020",
+  "UserAddress": {
+    "street": "24 Main St",
+    "city": "Guangzhou City",
+    "state": "GZ",
+    "zip": "12345",
+    "country": "China"
+  },
+  "UserRole": "user",
+  "UserPhoneNumber": "+8618188284234",
+  "UserisVerified": false,
+  "UserCreatedAt": "04-Apr-2024"
+},
+{
+  "_id": {
+    "$oid": "67f4cccac047d6edc7ace238"
+  },
+  "UserName": "Elis MA",
+  "UserEmail": "ElisMA@gmail.com",
+  "UserPassword": "555555",
+  "Enrollmentdate": "06-Jun-2020",
+  "UserAddress": {
+    "street": "35 Main St",
+    "city": "Guangzhou City",
+    "state": "GZ",
+    "zip": "12345",
+    "country": "China"
+  },
+  "UserRole": "user",
+  "UserPhoneNumber": "+8618188284245",
+  "UserisVerified": false,
+  "UserCreatedAt": "05-May-2024"
+},
+{
+  "_id": {
+    "$oid": "67f4cccac047d6edc7ace239"
+  },
+  "UserName": "Fiona YUA",
+  "UserEmail": "FionaYUA@gmail.com",
+  "UserPassword": "6666666",
+  "Enrollmentdate": "07-Jul-2020",
+  "UserAddress": {
+    "street": "46 Main St",
+    "city": "Guangzhou City",
+    "state": "GZ",
+    "zip": "12345",
+    "country": "China"
+  },
+  "UserRole": "user",
+  "UserPhoneNumber": "+8618188284256",
+  "UserisVerified": false,
+  "UserCreatedAt": "06-Jun-2024"
+}]

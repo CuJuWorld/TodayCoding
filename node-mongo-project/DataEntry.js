@@ -133,16 +133,54 @@ var customers =
     }
   ]
 ;
-/*
-var customers = [
+
+var orders = [
     { "Cid": 1, "UserName": "April CHAN", "UserEmail": "aprilchan@gmail.com", "Enrollmentdate": "02-Feb-2020" },
     { "Cid": 2, "UserName": "Bonita CHEUNG", "UserEmail": "BonitaCHEUNG@gmail.com", "Enrollmentdate": "03-Mar-2020" },
-    { "Cid": 3, "UserName": "Ceci KWAN", "UserEmail": "CeciKWAN@gmail.com", "Enrollmentdate": "04-Apr-2020"  },
-    { "Cid": 4, "UserName": "DiDi LEE", "UserEmail": "DiDiLEE@gmail.com", "Enrollmentdate": "05-May-2020" },
-    { "Cid": 5, "UserName": "Elis MA", "UserEmail": "ElisMA@gmail.com", "Enrollmentdate": "06-Jun-2020"  },
-    { "Cid": 6, "UserName": "Fiona YUA", "UserEmail": "FionaYUA@gmail.com", "Enrollmentdate": "07-Jul-2020" }
+
+user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Assuming you have a User model
+    required: true,
+  },
+  OrderItems: [{ // Renamed from 'products' to 'OrderItems'
+    productId: { // Renamed from 'product' to 'productId'
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Product',
+      required: true,
+    },
+    USD: { // Added from Product model
+      type: Number,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
+  }],
+  TotalAmount: { // Renamed from 'amount' to 'totalAmount'
+    type: Number,
+    required: true,
+  },
+  OrderDate: {
+    type: Date,
+    default: Date.now,
+  },
+  PromotionCode: { // Renamed from 'code' to 'PromotionCode'
+    type: String,
+    required: true,
+  },
+  OrderStatus: { // Renamed from 'status' to 'orderStatus'
+    type: String,
+    enum: ['pending', 'completed', 'refunded', 'delivered', 'canceled'],
+    default: 'pending',
+  },
+});
+
+
+
 ];
-*/
+
 UserName: {
     type: String,
     required: true,
