@@ -36,8 +36,8 @@ app.use('/categories', categoryRoutes);
 const userRoutes = require('./routes/user'); // Import user routes
 app.use('/users', userRoutes);       // Use user routes
 
-const userRoutes = require('./routes/order'); // Import user routes
-app.use('/orders', userRoutes);       // Use user routes
+const orderRoutes = require('./routes/order'); // Import user routes
+app.use('/orders', orderRoutes);       // Use user routes
 
 // Start the server
 app.listen(port, () => {
