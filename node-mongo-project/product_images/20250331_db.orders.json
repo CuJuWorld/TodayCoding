@@ -1,13 +1,42 @@
 [
-    {
-        "user":"67f4cccac047d6edc7ace234",
+    {"user":"67f4cccac047d6edc7ace234",
         "OrderItems": [{ 
             "productId": "67f35a2a1f7b95860c3bb271",
-            "quantity": 2,
-            "USD": 499
-        }],
-        "TotalAmount":12, 
+            "USD": 499,
+            "quantity": 1
+        },
+        { 
+            "productId": "67f35a2a1f7b95860c3bb276",
+            "USD": 1199,
+            "quantity": 1
+        }
+    ],
+        "TotalAmount": 1698, 
         "PromotionCode": "",
         "OrderStatus": "pending"
+    },
+    { "user":"67f4cccac047d6edc7ace235",
+        "OrderItems": [
+        { 
+            "productId": "67f35a2a1f7b95860c3bb273",
+            "USD": 899,
+            "quantity": 1
+        }
+    ],
+        "TotalAmount": 899, 
+        "PromotionCode": "",
+        "OrderStatus": "completed"
+    },
+    { "user":"67f4cccac047d6edc7ace236",
+    "OrderItems": [
+    { 
+        "productId": "67f35a2a1f7b95860c3bb275",
+        "USD": -1099,
+        "quantity": 1
     }
+],
+    "TotalAmount": -1099, 
+    "PromotionCode": "",
+    "OrderStatus": "refunded"
+}
 ]
