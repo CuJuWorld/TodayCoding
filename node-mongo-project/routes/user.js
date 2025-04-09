@@ -72,9 +72,9 @@ router.post('/', async (req, res) => {
 
     try {
         const newUser = await user.save(); // create users collection
-        res.status(201).json(newUser);
+        return res.status(201).json(newUser);
     } catch (err) {
-        res.status(400).json({ message: err.message });
+        return res.status(400).json({ message: err.message });
     }
 });
 
@@ -83,18 +83,21 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         let user;
-        const { UserName, UserEmail } = req.body;
+        const {UserPassword, ...data } = req.body;
         try {
             user = await User.findById(req.params.id);
             if(!user) res.status(404).json({ message: 'User not found' });
         } catch (err) {
-            res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'User not found' });
         }
+        user = await User.findByIdAndUpdate(
+            req.params.id, // Filter by ID
+            data, // Update fields
+            { new: true, runValidators: true } // Options
+        );
 
-        if (UserName) user.UserName = UserName;
-        if (UserEmail) user.UserEmail = UserEmail;
         user = await user.save(); // update users collection
-        res.json(user);
+        return res.status(201).json(user);
     } catch (err) {
         res.status(400).json({ message: err.message });
     }

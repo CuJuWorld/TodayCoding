@@ -5,6 +5,7 @@ const ProductSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
+    //Title
     ProductName: {
         type: String,
         required: true,
