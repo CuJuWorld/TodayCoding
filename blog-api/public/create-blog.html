@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>創建博客</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            background-image: url('./img/login_background_img.jpg');
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        div {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 200px;
+            resize: vertical;
+        }
+        button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #message {
+            margin-top: 15px;
+            color: #dc3545;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>創建新博客</h1>
+    <form id="blogForm">
+        <div>
+            <label>標題:</label>
+            <input type="text" id="title" required>
+        </div>
+        <div>
+            <label>內容:</label>
+            <textarea id="content" required></textarea>
+        </div>
+        <button type="submit">提交</button>
+        <button type="button" onclick="window.location.href='/blogs.html'">返回</button>
+    </form>
+    <div id="message"></div>
+
+    <script>
+        document.getElementById('blogForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+
+            try {
+                const response = await fetch('/api/blogs', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ title, content })
+                });
+                
+                const data = await response.json();
+                if (response.ok) {
+                    window.location.href = '/blogs.html';
+                } else {
+                    document.getElementById('message').textContent = data.message;
+                }
+            } catch (error) {
+                document.getElementById('message').textContent = '發生錯誤';
+            }
+        });
+    </script>
+</body>
+</html>

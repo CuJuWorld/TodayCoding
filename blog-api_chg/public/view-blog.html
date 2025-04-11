@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>檢視博客</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            background-image: url('./img/login_background_img.jpg');
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        button {
+            padding: 8px 16px;
+            margin: 0 5px 15px 0;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #blog-content {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #blog-content h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        #blog-content p {
+            color: #666;
+            margin: 10px 0;
+        }
+
+        #error-message {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>檢視博客</h1>
+    <button onclick="window.location.href='/blogs.html'">返回博客列表</button>
+    <div id="blog-content"></div>
+    <div id="error-message"></div>
+
+    <script>
+        // 格式化日期函數
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleString('zh-TW', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // 從 URL 獲取博客 ID
+        const urlParams = new URLSearchParams(window.location.search);
+        const blogId = urlParams.get('id');
+
+        // 加載博客內容
+        async function loadBlog() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            if (!blogId) {
+                document.getElementById('error-message').innerHTML = '錯誤: 未提供博客 ID';
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/blogs/${blogId}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || '獲取博客失敗');
+                }
+
+                const blog = await response.json();
+                const blogContentDiv = document.getElementById('blog-content');
+                blogContentDiv.innerHTML = `
+                    <h2>${blog.title}</h2>
+                    <p>${blog.content}</p>
+                    <p>作者: ${blog.author.username}</p>
+                    <p>發布時間: ${formatDate(blog.createdAt)}</p>
+                    <p>更新時間: ${formatDate(blog.updatedAt || blog.createdAt)}</p>
+                `;
+            } catch (error) {
+                console.error('載入博客失敗:', error);
+                document.getElementById('error-message').innerHTML = `錯誤: ${error.message}`;
+            }
+        }
+
+        // 頁面載入時執行
+        loadBlog();
+    </script>
+</body>
+
+</html>

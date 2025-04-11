@@ -1,43 +1,37 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const path = require('path'); // Import the path module for handling file paths
 
 const app = express(); // Create an instance of an Express application
 const port = process.env.PORT || 3000; // Set the port to listen on
 
-const middleware = require('./middleware'); // Import the middleware configuration
-const path = require('path'); // Import the path module for handling file paths
-// Use the middleware for the Express application
-middleware(app); // Call the middleware function, passing the app instance
 // Middleware
 app.use(bodyParser.json());
 
+// Serve static files from the project directory
+app.use(express.static(path.join(__dirname)));
+
+// Import routes
+const userAuthRegisterRoute = require('./routes/userauthregister'); // Import userauthregister route
+const productReviewRoute = require('./routes/productreview'); // Import productreview route
 
 // Connect to the database
-// connectDB(); // Call the function to establish a connection to the MongoDB database
-
-
-mongoose.connect('mongodb://localhost:27017/20250331_db')
-  .then(() => console.log('MongoDB connected...'))
+mongoose.connect('mongodb://localhost:27017/20250331_db', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => console.log('MongoDB connected...'))
   .catch(err => console.log(err));
 
+// Define Routes
+app.use('/register', userAuthRegisterRoute); // User registration route
+app.use('/auth', userAuthRegisterRoute); // Ensure this is correctly defined
+app.use('/reviews', productReviewRoute); // Product review route
 
-// Define Routes (before starting the server)
-
-const productRoutes = require('./routes/product'); // Import user routes
-app.use('/products', productRoutes);       // Use user routes
-
-const supplierRoutes = require('./routes/supplier'); // Import user routes
-app.use('/suppliers', supplierRoutes);       // Use user routes
-
-const categoryRoutes = require('./routes/category'); // Import user routes
-app.use('/categories', categoryRoutes);
-
-const userRoutes = require('./routes/user'); // Import user routes
-app.use('/users', userRoutes);       // Use user routes
-
-const orderRoutes = require('./routes/order'); // Import user routes
-app.use('/orders', orderRoutes);       // Use user routes
+// Serve index.html as the default route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // Start the server
 app.listen(port, () => {
