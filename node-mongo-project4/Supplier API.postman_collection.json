@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "8ba4e81e-7a46-4fc4-b676-9292794b2aa8",
+		"name": "Supplier API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9763707",
+		"_collection_link": "https://speeding-trinity-4468.postman.co/workspace/My-Teaching-Workspace~d01d239f-641f-4ed2-93cf-796c498018e4/collection/9763707-8ba4e81e-7a46-4fc4-b676-9292794b2aa8?action=share&source=collection_link&creator=9763707"
+	},
+	"item": [
+		{
+			"name": "Get All Suppliers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/suppliers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"suppliers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Supplier by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/suppliers/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"suppliers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "SUPPLIER_ID_HERE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Supplier",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"New Supplier Name\",\n\t\"otherField\": \"value\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/suppliers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"suppliers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Supplier by ID",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Updated Supplier Name\",\n\t\"otherField\": \"new value\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/suppliers/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"suppliers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "SUPPLIER_ID_HERE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Supplier by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/suppliers/67f877a400b22c4876d7e7ce",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"suppliers",
+						"67f877a400b22c4876d7e7ce"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
