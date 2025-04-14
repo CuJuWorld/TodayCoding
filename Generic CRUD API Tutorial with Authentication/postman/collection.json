@@ -1,0 +1,924 @@
+{
+	"info": {
+		"_postman_id": "5f261bb7-1532-438b-aacd-785832724b70",
+		"name": "Teaching Project API",
+		"description": "API endpoints for the teaching project.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9763707",
+		"_collection_link": "https://speeding-trinity-4468.postman.co/workspace/My-Teaching-Workspace~d01d239f-641f-4ed2-93cf-796c498018e4/collection/9763707-5f261bb7-1532-438b-aacd-785832724b70?action=share&source=collection_link&creator=9763707"
+	},
+	"item": [
+		{
+			"name": "User Authentication API",
+			"item": [
+				{
+					"name": "Register User or Admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin1\",\r\n    \"email\": \"admin1@example.com\",\r\n    \"password\": \"admin1\",\r\n    \"firstName\": \"admin\",\r\n    \"lastName\": \"admin\",\r\n    \"role\": \"user\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST \\\r\n  http://localhost:3000/api/auth/register \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n    \"username\": \"alice\",\r\n    \"email\": \"alice@example.com\",\r\n    \"password\": \"password123\",\r\n    \"firstName\": \"Alice\",\r\n    \"lastName\": \"Wonder\"\r\n  }'"
+					},
+					"response": [
+						{
+							"name": "201 Created User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"user\",\r\n    \"email\": \"user@example.com\",\r\n    \"password\": \"user\",\r\n    \"firstName\": \"user\",\r\n    \"lastName\": \"user\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "311"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"137-daWXhcG0zC/RK2T3Eiw1LrGnlpM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 02:41:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User registered successfully\",\n    \"user\": {\n        \"username\": \"user\",\n        \"email\": \"user@example.com\",\n        \"firstName\": \"user\",\n        \"lastName\": \"user\",\n        \"role\": \"user\",\n        \"isActive\": true,\n        \"createdAt\": \"2025-04-09T07:33:07.775Z\",\n        \"updatedAt\": \"2025-04-09T07:39:21.738Z\",\n        \"lastLogin\": \"2025-04-09T07:39:21.738Z\",\n        \"fullName\": \"user user\",\n        \"id\": \"67f622b38e73fc54ba625637\"\n    }\n}"
+						},
+						{
+							"name": "201 Created Admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"admin1\",\r\n    \"email\": \"admin1@example.com\",\r\n    \"password\": \"admin1\",\r\n    \"firstName\": \"admin\",\r\n    \"lastName\": \"admin\",\r\n    \"role\": \"admin\"\r\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "338"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"152-KHHMVe706qesOHUtQfKZx0GmigE\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 07:35:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User registered successfully\",\n    \"user\": {\n        \"username\": \"admin\",\n        \"email\": \"admin@example.com\",\n        \"firstName\": \"admin\",\n        \"lastName\": \"admin\",\n        \"role\": \"admin\",\n        \"isActive\": true,\n        \"createdAt\": \"2025-04-09T07:14:55.714Z\",\n        \"updatedAt\": \"2025-04-09T07:39:35.499Z\",\n        \"lastLogin\": \"2025-04-09T07:39:35.499Z\",\n        \"fullName\": \"admin admin\",\n        \"id\": \"67f61e6fa5cffd601752ef5c\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login User or Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Login successful and token updated in environment\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    // Extract the token and role based on your provided output\r",
+									"    const token = responseJson.token;\r",
+									"    const role = responseJson.user.role;\r",
+									"\r",
+									"    if (token) {\r",
+									"        if (role === \"admin\") {\r",
+									"            pm.environment.set(\"admin_token\", token);\r",
+									"            console.log(\"Admin token updated in environment.\");\r",
+									"        } else if (role === \"user\") {\r",
+									"            pm.environment.set(\"user_token\", token);\r",
+									"            console.log(\"User token updated in environment.\");\r",
+									"        } else {\r",
+									"            console.log(\"User role not recognized, token not automatically assigned.\");\r",
+									"        }\r",
+									"    } else {\r",
+									"        console.error(\"Token not found in the login response.\");\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"identifier\": \"user\",\n\t\"password\": \"user\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login an existing user."
+					},
+					"response": [
+						{
+							"name": "200 Login Admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"identifier\": \"admin\",\n\t\"password\": \"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "568"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"238-lQ+AzOT+J3ch6HRW1rV0xlgYyhA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 07:31:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Login successful\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2Y2MWU2ZmE1Y2ZmZDYwMTc1MmVmNWMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDQxODQzNzUsImV4cCI6MTc0Njc3NjM3NX0.eGsp83V2VRoOLHIxEkZTXLFgJ08inpxCd1V-Wl1qXu0\",\n    \"user\": {\n        \"_id\": \"67f61e6fa5cffd601752ef5c\",\n        \"username\": \"admin\",\n        \"email\": \"admin@example.com\",\n        \"firstName\": \"admin\",\n        \"lastName\": \"admin\",\n        \"role\": \"admin\",\n        \"isActive\": true,\n        \"createdAt\": \"2025-04-09T07:14:55.714Z\",\n        \"updatedAt\": \"2025-04-09T07:39:35.499Z\",\n        \"lastLogin\": \"2025-04-09T07:39:35.499Z\",\n        \"fullName\": \"admin admin\",\n        \"id\": \"67f61e6fa5cffd601752ef5c\"\n    }\n}"
+						},
+						{
+							"name": "200 Login User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"identifier\": \"user\",\n\t\"password\": \"user\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/auth/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "568"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"238-lQ+AzOT+J3ch6HRW1rV0xlgYyhA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 07:31:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Login successful\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2Y2MjJiMzhlNzNmYzU0YmE2MjU2MzciLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NDE4NDM2MSwiZXhwIjoxNzQ2Nzc2MzYxfQ.AokcI7HSuo2TGrugIe78_lfm14FxTv_x6WZ0zCOxJaM\",\n    \"user\": {\n        \"_id\": \"67f622b38e73fc54ba625637\",\n        \"username\": \"user\",\n        \"email\": \"user@example.com\",\n        \"firstName\": \"user\",\n        \"lastName\": \"user\",\n        \"role\": \"user\",\n        \"isActive\": true,\n        \"createdAt\": \"2025-04-09T07:33:07.775Z\",\n        \"updatedAt\": \"2025-04-09T07:39:21.738Z\",\n        \"lastLogin\": \"2025-04-09T07:39:21.738Z\",\n        \"fullName\": \"user user\",\n        \"id\": \"67f622b38e73fc54ba625637\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User API",
+			"item": [
+				{
+					"name": "Get All Users (User or Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Get a list of all users (requires user or admin token)."
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{admin_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1352"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"548-LL6AmbQA+5xCk/Bhdu0Y+JVm8V0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 08:55:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"results\": 4,\n    \"totalDocuments\": 4,\n    \"currentPage\": 1,\n    \"totalPages\": 1,\n    \"data\": [\n        {\n            \"_id\": \"67f6233a8e73fc54ba625639\",\n            \"username\": \"admin1\",\n            \"email\": \"admin1@example.com\",\n            \"firstName\": \"admin\",\n            \"lastName\": \"admin\",\n            \"role\": \"admin\",\n            \"isActive\": true,\n            \"createdAt\": \"2025-04-09T07:35:22.279Z\",\n            \"updatedAt\": \"2025-04-09T07:35:22.279Z\",\n            \"fullName\": \"admin admin\",\n            \"id\": \"67f6233a8e73fc54ba625639\"\n        },\n        {\n            \"_id\": \"67f622b38e73fc54ba625637\",\n            \"username\": \"user\",\n            \"email\": \"user@example.com\",\n            \"firstName\": \"user\",\n            \"lastName\": \"user\",\n            \"role\": \"user\",\n            \"isActive\": true,\n            \"createdAt\": \"2025-04-09T07:33:07.775Z\",\n            \"updatedAt\": \"2025-04-09T08:44:54.201Z\",\n            \"lastLogin\": \"2025-04-09T08:44:54.194Z\",\n            \"fullName\": \"user user\",\n            \"id\": \"67f622b38e73fc54ba625637\"\n        },\n        {\n            \"_id\": \"67f61e6fa5cffd601752ef5c\",\n            \"username\": \"admin\",\n            \"email\": \"admin@example.com\",\n            \"firstName\": \"admin\",\n            \"lastName\": \"admin\",\n            \"role\": \"admin\",\n            \"isActive\": true,\n            \"createdAt\": \"2025-04-09T07:14:55.714Z\",\n            \"updatedAt\": \"2025-04-09T08:33:43.451Z\",\n            \"lastLogin\": \"2025-04-09T08:33:43.451Z\",\n            \"fullName\": \"admin admin\",\n            \"id\": \"67f61e6fa5cffd601752ef5c\"\n        },\n        {\n            \"_id\": \"67f5ed2fc5a9de6e50caf7d9\",\n            \"username\": \"alice\",\n            \"email\": \"alice@example.com\",\n            \"firstName\": \"Alice\",\n            \"lastName\": \"Wonder\",\n            \"role\": \"user\",\n            \"isActive\": true,\n            \"createdAt\": \"2025-04-09T03:44:47.471Z\",\n            \"updatedAt\": \"2025-04-09T04:28:21.367Z\",\n            \"lastLogin\": \"2025-04-09T04:28:21.365Z\",\n            \"fullName\": \"Alice Wonder\",\n            \"id\": \"67f5ed2fc5a9de6e50caf7d9\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User by ID (User or Admin, Owner)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/67f622b38e73fc54ba625637",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"67f622b38e73fc54ba625637"
+							]
+						},
+						"description": "Get details of a specific user by ID (requires user or admin token, owner access)."
+					},
+					"response": []
+				},
+				{
+					"name": "Update User by ID (User or Admin, Owner)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"updated@example.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{user_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}"
+							]
+						},
+						"description": "Update a specific user by ID (requires user or admin token, owner access)."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User by ID (User or Admin, Owner)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{user_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/{{user_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user_id}}"
+							]
+						},
+						"description": "Delete a specific user by ID (requires user or admin token, owner access)."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Event API",
+			"item": [
+				{
+					"name": "Create Event (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"New Event\",\n\t\"date\": \"2025-04-15T10:00:00Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"events"
+							]
+						},
+						"description": "Create a new event (requires admin token)."
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Events (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"events"
+							]
+						},
+						"description": "Get a list of all events (requires admin token)."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event by ID (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/events/{{event_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"events",
+								"{{event_id}}"
+							]
+						},
+						"description": "Get details of a specific event by ID (requires admin token)."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Event by ID (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Updated Event\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/events/67f636bbc09f6281693762dd",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"events",
+								"67f636bbc09f6281693762dd"
+							]
+						},
+						"description": "Update a specific event by ID (requires admin token)."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Event by ID (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/events/{{event_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"events",
+								"{{event_id}}"
+							]
+						},
+						"description": "Delete a specific event by ID (requires admin token)."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer API",
+			"item": [
+				{
+					"name": "Create Customer (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"New Customer\",\n\t\"email\": \"customer@example.com\",\n    \"lastName\": \"aaa\",\n    \"firstName\": \"dddd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/customers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"customers"
+							]
+						},
+						"description": "Create a new customer (requires admin token)."
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Customers (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/customers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"customers"
+							]
+						},
+						"description": "Get a list of all customers (requires admin token)."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer by ID (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/customers/{{customer_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"customers",
+								"{{customer_id}}"
+							]
+						},
+						"description": "Get details of a specific customer by ID (requires admin token)."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer by ID (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"New Customer\",\n\t\"email\": \"customer@example.com\",\n    \"lastName\": \"aaa\",\n    \"firstName\": \"dddd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/customers/67f6373cc09f6281693762f3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"customers",
+								"67f6373cc09f6281693762f3"
+							]
+						},
+						"description": "Update a specific customer by ID (requires admin token)."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer by ID (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/customers/{{customer_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"customers",
+								"{{customer_id}}"
+							]
+						},
+						"description": "Delete a specific customer by ID (requires admin token)."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "user_token",
+			"value": ""
+		},
+		{
+			"key": "admin_token",
+			"value": ""
+		},
+		{
+			"key": "user_id",
+			"value": ""
+		},
+		{
+			"key": "event_id",
+			"value": ""
+		},
+		{
+			"key": "customer_id",
+			"value": ""
+		}
+	]
+}
