@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Form</title>
+</head>
+<body>
+    <h1>Submit Your Data</h1>
+    <form onsubmit="submitForm(event)" enctype="multipart/form-data">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <label for="image">Upload Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        async function submitForm(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const form = event.target; // Get the form element
+            const formData = new FormData(form); // Create a FormData object
+
+            try {
+                const response = await fetch('/users/submit/v2', {
+                    method: 'POST',
+                    body: formData // Directly send FormData
+                });
+
+                if (response.ok) {
+                    const message = await response.text();
+                    alert(message); // Show success message
+                } else {
+                    alert('Error submitting data!');
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -33,7 +33,18 @@ DELETE  /api/blogs/:id
 [MongoDB Installation Made SUPER Easy!](https://www.youtube.com/watch?v=6BuRmE63ZJQ)
 
 ## ER Diagram 結構
-<img width="367" alt="image" src="https://github.com/user-attachments/assets/3a201aa1-e351-476b-99d8-258d6b5c6d90" />
+<img width="371" alt="blog-api-erdiagram" src="https://github.com/user-attachments/assets/82871c6c-cca4-4976-b00b-b0dceec4cfe6" />
+
+## Blog Category
+```bash
+<option value="Camera / Computer / MobilePhone / Home Appliances">Camera / Computer / MobilePhone / Home Appliances</option>
+<option value="Drink and Eat">Drink and Eat</option>
+<option value="Entertainment">Entertainment</option>
+<option value="Hiking">Hiking</option>
+<option value="Learning">Learning</option>
+<option value="Sightseeing">Sightseeing</option>
+<option value="Others">Others</option>
+```
 
 ## 資料夾結構
 ```bash

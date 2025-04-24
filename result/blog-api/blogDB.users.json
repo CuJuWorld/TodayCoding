@@ -1,0 +1,60 @@
+[{
+  "_id": {
+    "$oid": "67fc7fe32a51dc5dc33cdb36"
+  },
+  "username": "kelvin",
+  "password": "$2b$10$vgC7.vsUmJUI3u.2x2PwoeU6J9D239i8.PAtlFeU.0czxJ64C71uS",
+  "email": "kelvin@gmail.com",
+  "createdAt": {
+    "$date": "2025-04-14T03:24:19.899Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T03:24:19.899Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc80be2a51dc5dc33cdb42"
+  },
+  "username": "fanfan",
+  "password": "$2b$10$qFgOs5SJLsHruyuvfL.6p.7R3oBI1QhPQ5Y1wqLgS6qiymiCY3Iwq",
+  "email": "fanfan@gmail.com",
+  "createdAt": {
+    "$date": "2025-04-14T03:27:58.993Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T03:27:58.993Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc81632a51dc5dc33cdb4f"
+  },
+  "username": "weibin",
+  "password": "$2b$10$pcAIcK8nzliNRQjzt6ODG.cJydloaHXbLdMCF7iZaUVzJja4Uqp5S",
+  "email": "weibin@gmail.com",
+  "createdAt": {
+    "$date": "2025-04-14T03:30:43.050Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T03:30:43.050Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc81de2a51dc5dc33cdb5c"
+  },
+  "username": "waileuk",
+  "password": "$2b$10$U5zMEp3H6jlzRnuqepAQdOrRkrbfjTab5pWQTwbCmtt9uZi8uxJLa",
+  "email": "waileuk@gmail.com",
+  "createdAt": {
+    "$date": "2025-04-14T03:32:46.022Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T03:32:46.022Z"
+  },
+  "__v": 0
+}]

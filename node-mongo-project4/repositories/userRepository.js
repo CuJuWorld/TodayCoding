@@ -22,6 +22,16 @@ async function findUserById(id) {
     }
 }
 
+// Get a single user by email
+async function findUserByEmail(email) {
+    try {
+        return await User.findOne({ UserEmail: email });
+    } catch (error) {
+        console.error("Error in User Repository (findUserByEmail):", error);
+        throw error;
+    }
+}
+
 // Create a new user
 async function createUser(userData) {
     try {
@@ -33,24 +43,24 @@ async function createUser(userData) {
     }
 }
 
-// Update a user by ID
-async function updateUserById(id, updateData) {
+// Update a user by email
+async function updateUserByEmail(email, updateData) {
     try {
-        const user = await User.findByIdAndUpdate(id, updateData, { new: true, runValidators: true });
+        const user = await User.findOneAndUpdate({ UserEmail: email }, updateData, { new: true, runValidators: true });
         return user; // Return the updated document
     } catch (error) {
-        console.error("Error in User Repository (updateUserById):", error);
+        console.error("Error in User Repository (updateUserByEmail):", error);
         throw error;
     }
 }
 
-// Delete a user by ID
-async function deleteUserById(id) {
+// Delete a user by email
+async function deleteUserByEmail(email) {
     try {
-        const user = await User.findByIdAndDelete(id);
+        const user = await User.findOneAndDelete({ UserEmail: email });
         return user; // Return the deleted document (can be null if not found)
     } catch (error) {
-        console.error("Error in User Repository (deleteUserById):", error);
+        console.error("Error in User Repository (deleteUserByEmail):", error);
         throw error;
     }
 }
@@ -58,7 +68,8 @@ async function deleteUserById(id) {
 module.exports = {
     findAllUsers,
     findUserById,
+    findUserByEmail,
     createUser,
-    updateUserById,
-    deleteUserById,
+    updateUserByEmail, // Updated to use email
+    deleteUserByEmail, // Updated to use email
 };

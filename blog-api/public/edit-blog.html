@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>編輯博客</title>
+    <title>Edit Blog 編輯博客</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -30,7 +30,7 @@
             margin-bottom: 5px;
             color: #666;
         }
-        input, textarea {
+        input, textarea, select {
             width: 100%;
             padding: 8px;
             border: 1px solid #ddd;
@@ -67,18 +67,35 @@
     </style>
 </head>
 <body>
-    <h1>編輯博客</h1>
-    <form id="editBlogForm">
+    <h1>Edit Blog 編輯博客</h1>
+    <form id="editBlogForm" enctype="multipart/form-data">
         <div>
-            <label>標題:</label>
-            <input type="text" id="title" required>
+            <label>Topic 標題:</label>
+            <select id="title" required>
+                <option value="" disabled>請選擇標題</option>
+                <option value="Camera / Computer / MobilePhone / Home Appliances">Camera / Computer / MobilePhone / Home Appliances</option>
+                <option value="Drink and Eat">Drink and Eat</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Hiking">Hiking</option>
+                <option value="Learning">Learning</option>
+                <option value="Sightseeing">Sightseeing</option>
+                <option value="Sports & others">Sports & others</option>
+            </select>
         </div>
         <div>
-            <label>內容:</label>
+            <label>Content 內容:</label>
             <textarea id="content" required></textarea>
         </div>
-        <button type="submit">保存更改</button>
-        <button type="button" class="button-secondary" onclick="window.location.href='/blogs.html'">取消</button>
+        <div id="existingImages">
+            <label>Existing 現有圖片:</label>
+            <div id="imagePreview"></div>
+        </div>
+        <div>
+            <label>Replace (3 pics & each max 3M) 替換 (最多3張，每張最大3MB):</label>
+            <input type="file" id="images" name="images" accept="image/*" multiple>
+        </div>
+        <button type="submit">Save 保存</button>
+        <button type="button" class="button-secondary" onclick="window.location.href='/blogs.html'">Cancel 取消</button>
     </form>
     <div id="message"></div>
 
@@ -105,8 +122,18 @@
                 }
 
                 const blog = await response.json();
-                document.getElementById('title').value = blog.title;
+                document.getElementById('title').value = blog.title; // Preselect the current title
                 document.getElementById('content').value = blog.content;
+
+                // 顯示現有圖片
+                const imagePreview = document.getElementById('imagePreview');
+                if (blog.images && blog.images.length > 0) {
+                    imagePreview.innerHTML = blog.images.map(image => `
+                        <img src="/blog-img/${image}" style="width: 25%; margin-right: 10px;">
+                    `).join('');
+                } else {
+                    imagePreview.innerHTML = '<p>無現有圖片</p>';
+                }
             } catch (error) {
                 document.getElementById('message').textContent = '載入博客失敗';
                 localStorage.removeItem('token');
@@ -118,17 +145,28 @@
         document.getElementById('editBlogForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const title = document.getElementById('title').value;
-            const content = document.getElementById('content').value;
+            const formData = new FormData();
+            formData.append('title', document.getElementById('title').value);
+            formData.append('content', document.getElementById('content').value);
+
+            const images = document.getElementById('images').files;
+            if (images.length > 3) {
+                document.getElementById('message').textContent = '最多只能上傳 3 張圖片';
+                return;
+            }
+            for (const image of images) {
+                if (image.size > 3 * 1024 * 1024) {
+                    document.getElementById('message').textContent = '每張圖片大小不能超過 3MB';
+                    return;
+                }
+                formData.append('images', image);
+            }
 
             try {
                 const response = await fetch(`/api/blogs/${blogId}`, {
                     method: 'PUT',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({ title, content })
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    body: formData
                 });
                 
                 const data = await response.json();

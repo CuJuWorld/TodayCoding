@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>檢視博客</title>
+    <title>View Blog 檢視博客</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -58,8 +58,8 @@
 </head>
 
 <body>
-    <h1>檢視博客</h1>
-    <button onclick="window.location.href='/blogs.html'">返回博客列表</button>
+    <h1>View Blog 檢視博客</h1>
+    <button onclick="window.location.href='/blogs.html'">Back 返回列表</button>
     <div id="blog-content"></div>
     <div id="error-message"></div>
 
@@ -108,9 +108,12 @@
                 blogContentDiv.innerHTML = `
                     <h2>${blog.title}</h2>
                     <p>${blog.content}</p>
-                    <p>作者: ${blog.author.username}</p>
-                    <p>發布時間: ${formatDate(blog.createdAt)}</p>
-                    <p>更新時間: ${formatDate(blog.updatedAt || blog.createdAt)}</p>
+                    <p>author 作者: ${blog.author.username}</p>
+                    <p>Publish 發布: ${formatDate(blog.createdAt)}</p>
+                    <p>Update 更新: ${formatDate(blog.updatedAt || blog.createdAt)}</p>
+                    ${blog.images && blog.images.length > 0 ? blog.images.map(image => `
+                        <img src="/blog-img/${image}" style="width: 100%; margin-top: 15px;">
+                    `).join('') : ''}
                 `;
             } catch (error) {
                 console.error('載入博客失敗:', error);

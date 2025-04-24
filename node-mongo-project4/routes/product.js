@@ -1,0 +1,44 @@
+// /routes/product.js
+
+const express = require('express');
+const router = express.Router();
+const productController = require('../controllers/productController');
+const productService = require('../services/productService');
+
+// Get all products
+router.get('/', productController.getAllProducts);
+
+// Get a single product by name
+router.get('/:name', productController.getProductByName);
+
+// Create a new product
+router.post('/', productController.createProduct);
+
+// Update a product by name
+router.put('/:name', productController.updateProductByName);
+
+// Delete a product by name
+router.delete('/:name', productController.deleteProductByName);
+
+router.post('/add', async (req, res) => {
+    try {
+        const { name, price } = req.body;
+        const product = await productService.addProduct(name, price);
+        res.status(201).json(product);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+router.put('/:name/price', async (req, res) => {
+    try {
+        const { name } = req.params;
+        const { price } = req.body;
+        const updatedProduct = await productService.changeProductPrice(name, price);
+        res.status(200).json(updatedProduct);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+module.exports = router;

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ProductReview = require('../models/productreview'); // Import the ProductReview model
+const Review = require('../models/review'); // Import the Review model
 
 // Get all reviews
 router.get('/', async (req, res) => {
@@ -48,6 +49,25 @@ router.post('/', async (req, res) => {
     }
 });
 
+// Update a review by UserEmail and ProductName
+router.put('/update', async (req, res) => {
+    const { UserEmail, ProductName, ReviewText, Rating } = req.body;
+
+    if (!UserEmail || !ProductName) {
+        return res.status(400).json({ message: "UserEmail and ProductName are required" });
+    }
+
+    try {
+        const updatedReview = await ProductReview.findAndUpdateReview(UserEmail, ProductName, { ReviewText, Rating });
+        if (!updatedReview) {
+            return res.status(404).json({ message: "Review not found" });
+        }
+        res.json({ message: "Review updated successfully", review: updatedReview });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 // Delete a review by ID
 router.delete('/:id', async (req, res) => {
     try {
@@ -56,6 +76,24 @@ router.delete('/:id', async (req, res) => {
         res.json({ message: 'Review deleted successfully' });
     } catch (err) {
         res.status(500).json({ message: err.message });
+    }
+});
+
+router.get('/api/reviews', async (req, res) => {
+    const { userRole, userEmail } = req.query;
+
+    try {
+        let reviews;
+        if (userRole === 'admin') {
+            reviews = await Review.find(); // Fetch all reviews for admin
+        } else {
+            reviews = await Review.find({ userEmail }); // Fetch only user's reviews
+        }
+
+        res.status(200).json({ reviews, userRole, userEmail });
+    } catch (err) {
+        console.error('Error fetching reviews:', err);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
 

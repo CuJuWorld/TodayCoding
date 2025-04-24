@@ -5,6 +5,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    UserEmail: {
+        type: String,
+        required: true,
+        unique: true,
+        match: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, // Optimized email validation
+    },
+    UserPassword: {
+        type: String,
+        minlength: 6, // Minimum password length
+    },
     createdAt: {
         type: Date,
         default: Date.now,

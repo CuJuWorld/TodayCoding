@@ -27,4 +27,12 @@ const ProductReviewSchema = new mongoose.Schema({
     }
 });
 
+ProductReviewSchema.statics.findAndUpdateReview = async function (userEmail, productName, updatedReview) {
+    return this.findOneAndUpdate(
+        { UserEmail: userEmail, ProductName: productName },
+        { $set: updatedReview },
+        { new: true }
+    );
+};
+
 module.exports = mongoose.model('ProductReview', ProductReviewSchema);

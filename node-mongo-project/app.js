@@ -15,6 +15,7 @@ app.use(express.static(path.join(__dirname)));
 // Import routes
 const userAuthRegisterRoute = require('./routes/userauthregister'); // Import userauthregister route
 const productReviewRoute = require('./routes/productreview'); // Import productreview route
+const reviewsRouter = require('./routes/reviews'); // Import reviews route
 
 // Connect to the database
 mongoose.connect('mongodb://localhost:27017/20250331_db', {
@@ -27,6 +28,7 @@ mongoose.connect('mongodb://localhost:27017/20250331_db', {
 app.use('/register', userAuthRegisterRoute); // User registration route
 app.use('/auth', userAuthRegisterRoute); // Ensure this is correctly defined
 app.use('/reviews', productReviewRoute); // Product review route
+app.use(reviewsRouter); // Use reviews route
 
 // Serve index.html as the default route
 app.get('/', (req, res) => {

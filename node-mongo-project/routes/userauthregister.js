@@ -50,13 +50,17 @@ router.post('/register', async (req, res) => {
         // Hash the password
         const hashedPassword = await bcrypt.hash(UserPassword, 10);
 
+        // Determine user role based on email
+        const UserRole = UserEmail.includes('admin@') ? 'admin' : 'user';
+
         // Create a new user
         const user = new User({
             UserName,
             UserEmail,
             UserPassword: hashedPassword,
             UserPhoneNumber, // Correctly map the phone number
-            UserAddress
+            UserAddress,
+            UserRole // Add UserRole to the user object
         });
 
         // Save the user to the database
@@ -94,7 +98,13 @@ router.post('/login', async (req, res) => {
         }
 
         console.log("Login successful for user:", user);
-        res.status(200).json({ message: "Login successful", user });
+
+        // Include UserRole in the response
+        return res.status(200).json({ 
+            message: "Login successful", 
+            userRole: user.UserRole, 
+            userEmail: user.UserEmail 
+        });
     } catch (err) {
         console.error("Error during login:", err);
         res.status(500).json({ message: "Internal server error" });

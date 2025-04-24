@@ -21,7 +21,15 @@ const blogSchema = new mongoose.Schema({
     updatedAt: {
         type: Date,
         default: Date.now
+    },
+    images: {
+        type: [String], // Array of image paths
+        validate: [arrayLimit, '{PATH} exceeds the limit of 3 images']
     }
 });
+
+function arrayLimit(val) {
+    return val.length <= 3; // Maximum 3 images
+}
 
 module.exports = mongoose.model('Blog', blogSchema);

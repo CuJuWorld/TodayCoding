@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Admin</title>
+</head>
+
+<body>
+    <h1>Product Administration</h1>
+
+    <form id="addProductForm">
+        <h2>Add New Product</h2>
+        <input type="text" id="addProductName" placeholder="Product Name" required>
+        <input type="number" id="addProductPrice" placeholder="Product Price" required>
+        <button type="submit">Add Product</button>
+    </form>
+
+    <form id="updateProductForm">
+        <h2>Update Product</h2>
+        <select id="updateProductName" required>
+            <option value="" disabled selected>Select Product</option>
+        </select>
+        <input type="text" id="newProductName" placeholder="New Product Name">
+        <input type="number" id="newProductPrice" placeholder="New Product Price">
+        <button type="submit">Update Product</button>
+    </form>
+
+    <form id="deleteProductForm">
+        <h2>Delete Product</h2>
+        <select id="deleteProductName" required>
+            <option value="" disabled selected>Select Product</option>
+        </select>
+        <button type="submit">Delete Product</button>
+    </form>
+
+    <script>
+        document.getElementById('addProductForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('addProductName').value;
+            const price = document.getElementById('addProductPrice').value;
+
+            try {
+                const response = await fetch('/products/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, price }),
+                });
+
+                if (response.ok) {
+                    alert('Product added successfully!');
+                } else {
+                    const error = await response.json();
+                    alert(`Error: ${error.error}`);
+                }
+            } catch (err) {
+                console.error('Error:', err);
+                alert('An error occurred while adding the product.');
+            }
+        });
+
+        document.getElementById('updateProductForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('updateProductName').value;
+            const newName = document.getElementById('newProductName').value;
+            const newPrice = document.getElementById('newProductPrice').value;
+
+            const updateData = {};
+            if (newName) updateData.name = newName;
+            if (newPrice) updateData.productPrice = newPrice;
+
+            try {
+                const response = await fetch(`/products/${name}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updateData),
+                });
+
+                if (response.ok) {
+                    alert('Product updated successfully!');
+                } else {
+                    const error = await response.json();
+                    alert(`Error: ${error.error}`);
+                }
+            } catch (err) {
+                console.error('Error:', err);
+                alert('An error occurred while updating the product.');
+            }
+        });
+
+        document.getElementById('deleteProductForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('deleteProductName').value;
+
+            try {
+                const response = await fetch(`/products/${name}`, {
+                    method: 'DELETE',
+                });
+
+                if (response.ok) {
+                    alert('Product deleted successfully!');
+                } else {
+                    const error = await response.json();
+                    alert(`Error: ${error.error}`);
+                }
+            } catch (err) {
+                console.error('Error:', err);
+                alert('An error occurred while deleting the product.');
+            }
+        });
+
+        // Populate deleteProductName dropdown with product names
+        async function populateDeleteProductDropdown() {
+            try {
+                const response = await fetch('/products');
+                if (response.ok) {
+                    const products = await response.json();
+                    const deleteProductDropdown = document.getElementById('deleteProductName');
+                    products.forEach(product => {
+                        const option = document.createElement('option');
+                        option.value = product.name;
+                        option.textContent = product.name;
+                        deleteProductDropdown.appendChild(option);
+                    });
+                } else {
+                    console.error('Failed to fetch products for deletion.');
+                }
+            } catch (err) {
+                console.error('Error fetching products:', err);
+            }
+        }
+
+        // Call the function to populate the dropdown on page load
+        populateDeleteProductDropdown();
+
+        // Populate updateProductName dropdown with product names
+        async function populateUpdateProductDropdown() {
+            try {
+                const response = await fetch('/products');
+                if (response.ok) {
+                    const products = await response.json();
+                    const updateProductDropdown = document.getElementById('updateProductName');
+                    products.forEach(product => {
+                        const option = document.createElement('option');
+                        option.value = product.name;
+                        option.textContent = product.name;
+                        updateProductDropdown.appendChild(option);
+                    });
+                } else {
+                    console.error('Failed to fetch products for updating.');
+                }
+            } catch (err) {
+                console.error('Error fetching products:', err);
+            }
+        }
+
+        // Call the function to populate the dropdown on page load
+        populateUpdateProductDropdown();
+    </script>
+</body>
+
+</html>

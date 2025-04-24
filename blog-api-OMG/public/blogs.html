@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>博客</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            background-image: url('./img/login_background_img.jpg');
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        button {
+            padding: 8px 16px;
+            margin: 0 5px 15px 0;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #blogs>div {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        #blogs h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        #blogs p {
+            color: #666;
+            margin: 5px 0;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            padding: 6px 12px;
+            margin: 0 2px;
+            background-color: #6c757d;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background-color: #5a6268;
+        }
+
+        .pagination button.active {
+            background-color: #007bff;
+            cursor: default;
+        }
+
+        .pagination button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #toTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background-color: #17a2b8;
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        #toTopBtn:hover {
+            background-color: #138496;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        .view-btn {
+            background-color: #28a745;
+            margin-right: 10px;
+        }
+
+        .view-btn:hover {
+            background-color: #218838;
+        }
+
+        .blog-timestamp {
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            font-size: 12px;
+            color: #888;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>博客列表</h1>
+    <button onclick="window.location.href='/create-blog.html'">創建新博客</button>
+    <button onclick="logout()">登出</button>
+    <div>
+        <label>Filter Blog Category:</label>
+        <select id="filterTitle">
+            <option value="">ALL</option>
+            <option value="Camera / Computer / MobilePhone / Home Appliances">Camera / Computer / MobilePhone / Home Appliances</option>
+            <option value="Drink and Eat">Drink and Eat</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Hiking">Hiking</option>
+            <option value="Learning">Learning</option>
+            <option value="Sightseeing">Sightseeing</option>
+            <option value="Others">Sports & Others</option>
+        </select>
+        <button id="filterButton">篩選</button>
+    </div>
+
+    <!--
+    <div>
+        <label>Filter by Username:</label>
+        <select id="filterUsername">
+            <option value="">ALL</option>
+
+        </select>
+        <button id="filterUsernameButton">篩選</button>
+    </div>
+    -->
+
+    <div id="blogs"></div>
+    <div class="pagination" id="pagination"></div>
+    <button id="toTopBtn" onclick="scrollToTop()">↑ 頂部</button>
+
+    <script>
+        let currentPage = 1;
+        const limit = 10; // 每頁顯示 10 條記錄
+        let currentUserId = null; // 用於儲存當前用戶的 ID
+
+        // 獲取當前用戶信息
+        async function fetchCurrentUser() {
+            const token = localStorage.getItem('token');
+            if (!token) return null;
+
+            try {
+                const response = await fetch('/api/auth/me', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (response.ok) {
+                    const user = await response.json();
+                    return user.id; // Ensure this matches the `_id` field in the database
+                }
+            } catch (error) {
+                console.error('獲取用戶信息失敗:', error);
+            }
+            return null;
+        }
+
+        async function loadBlogs(page = 1, titleFilter = '', usernameFilter = '') {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            if (!currentUserId) {
+                currentUserId = await fetchCurrentUser(); // Ensure currentUserId is fetched before loading blogs
+            }
+
+            try {
+                let url = `/api/blogs?page=${page}&limit=${limit}`;
+                if (titleFilter) {
+                    url += `&title=${encodeURIComponent(titleFilter)}`;
+                }
+                if (usernameFilter) {
+                    url += `&username=${encodeURIComponent(usernameFilter)}`;
+                }
+
+                const response = await fetch(url, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!response.ok) {
+                    throw new Error('請重新登錄');
+                }
+
+                const data = await response.json();
+                const blogsDiv = document.getElementById('blogs');
+                if (data.blogs.length === 0) {
+                    blogsDiv.innerHTML = '<p>暫無博客記錄</p>';
+                } else {
+                    blogsDiv.innerHTML = data.blogs.map(blog => `
+                        <div>
+                            <h2>${blog.title}</h2>
+                            ${blog.images.map(image => `<img src="${image}" alt="博客圖片" style="max-width: 20%; height: auto;">`).join('')}
+                            <p>${blog.content.substring(0, 100)}...</p>
+                            <p>作者: ${blog.author.username}</p>
+                            <button class="view-btn" onclick="window.location.href='/view-blog.html?id=${blog._id}'">檢視</button>
+                            ${currentUserId === blog.author._id ? // Ensure strict comparison
+                            `<button onclick="window.location.href='/edit-blog.html?id=${blog._id}'" 
+                                    style="background-color: #ffc107; margin-right: 10px;">編輯</button>
+                            <button class="delete-btn" onclick="deleteBlog('${blog._id}')">刪除</button>` : ''}
+                            <div class="blog-timestamp">
+                                發布時間: ${formatDate(blog.createdAt)}<br>
+                                更新時間: ${formatDate(blog.updatedAt || blog.createdAt)}
+                            </div>
+                        </div>
+                    `).join('');
+                }
+
+                updatePagination(data.currentPage, data.totalPages);
+                currentPage = data.currentPage;
+            } catch (error) {
+                console.error('載入博客失敗:', error);
+                localStorage.removeItem('token');
+                window.location.href = '/login.html';
+            }
+        }
+
+        // 刪除博客
+        async function deleteBlog(blogId) {
+            if (!blogId || typeof blogId !== 'string') {
+                alert('無效的博客 ID');
+                return;
+            }
+            if (!confirm('確定要刪除這篇博客嗎？')) return;
+
+            const token = localStorage.getItem('token');
+            try {
+                console.log('發送刪除請求，博客 ID:', blogId);
+                const response = await fetch(`/api/blogs/${blogId}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (response.ok) {
+                    alert('博客已成功刪除');
+                    loadBlogs(currentPage);
+                } else {
+                    const data = await response.json();
+                    console.log('後端錯誤回應:', data);
+                    alert(data.message || '刪除失敗');
+                }
+            } catch (error) {
+                console.error('刪除請求異常:', error);
+                alert('刪除過程中發生錯誤: ' + error.message);
+            }
+        }
+
+        function updatePagination(currentPage, totalPages) {
+            const paginationDiv = document.getElementById('pagination');
+            let buttons = '';
+
+            if (totalPages === 0) {
+                buttons += `<button disabled>上一頁</button>`;
+                buttons += `<button class="active" disabled>1</button>`;
+                buttons += `<button disabled>下一頁</button>`;
+            } else {
+                buttons += `<button onclick="loadBlogs(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>上一頁</button>`;
+                const startPage = Math.max(1, currentPage - 2);
+                const endPage = Math.min(totalPages, currentPage + 2);
+
+                if (startPage > 1) {
+                    buttons += `<button onclick="loadBlogs(1)">1</button>`;
+                    if (startPage > 2) buttons += `<span>...</span>`;
+                }
+
+                for (let i = startPage; i <= endPage; i++) {
+                    buttons += `<button onclick="loadBlogs(${i})" ${i === currentPage ? 'class="active"' : ''}>${i}</button>`;
+                }
+
+                if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) buttons += `<span>...</span>`;
+                    buttons += `<button onclick="loadBlogs(${totalPages})">${totalPages}</button>`;
+                }
+
+                buttons += `<button onclick="loadBlogs(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>下一頁</button>`;
+            }
+
+            paginationDiv.innerHTML = buttons;
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            window.location.href = '/login.html';
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        window.onscroll = function () {
+            const toTopBtn = document.getElementById('toTopBtn');
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                toTopBtn.style.display = 'block';
+            } else {
+                toTopBtn.style.display = 'none';
+            }
+        };
+
+        document.getElementById('filterTitle').addEventListener('change', async (e) => {
+            const selectedTitle = e.target.value;
+            let url = `/api/blogs?page=${currentPage}&limit=${limit}`;
+            if (selectedTitle) {
+                url += `&title=${encodeURIComponent(selectedTitle)}`;
+            }
+            try {
+                const response = await fetch(url, {
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+                const data = await response.json();
+                // Update the blog list based on the filtered data
+                const blogsDiv = document.getElementById('blogs');
+                blogsDiv.innerHTML = data.blogs.map(blog => `
+                    <div>
+                        <h2>${blog.title}</h2>
+                        ${blog.images.map(image => `<img src="${image}" alt="博客圖片" style="max-width: 20%; height: auto;">`).join('')}
+                        <p>${blog.content.substring(0, 100)}...</p>
+                        <p>作者: ${blog.author.username}</p>
+                        <button class="view-btn" onclick="window.location.href='/view-blog.html?id=${blog._id}'">檢視</button>
+                        ${currentUserId === blog.author._id ? `
+                        <button onclick="window.location.href='/edit-blog.html?id=${blog._id}'" 
+                                style="background-color: #ffc107; margin-right: 10px;">編輯</button>
+                        <button class="delete-btn" onclick="deleteBlog('${blog._id}')">刪除</button>` : ''}
+                        <div class="blog-timestamp">
+                            發布時間: ${formatDate(blog.createdAt)}<br>
+                            更新時間: ${formatDate(blog.updatedAt || blog.createdAt)}
+                        </div>
+                    </div>
+                `).join('');
+                updatePagination(data.currentPage, data.totalPages);
+            } catch (error) {
+                console.error('Failed to filter blogs:', error);
+            }
+        });
+
+        document.getElementById('filterButton').addEventListener('click', () => {
+            const selectedTitle = document.getElementById('filterTitle').value;
+            loadBlogs(1, selectedTitle);
+        });
+
+        /*
+        document.getElementById('filterUsernameButton').addEventListener('click', () => {
+            const selectedUsername = document.getElementById('filterUsername').value;
+            loadBlogs(1, '', selectedUsername);
+        });
+
+        async function populateUsernames() {
+            try {
+                const response = await fetch('/api/users', {
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch usernames');
+                }
+
+                const users = await response.json();
+                const filterUsername = document.getElementById('filterUsername');
+
+                if (users.length === 0) {
+                    filterUsername.innerHTML = '<option value="">ALL</option>';
+                    console.warn('No usernames found');
+                    return;
+                }
+
+                filterUsername.innerHTML = '<option value="">ALL</option>' + 
+                    users.map(user => `<option value="${user.username}">${user.username}</option>`).join('');
+            } catch (error) {
+                console.error('Failed to fetch usernames:', error);
+            }
+        }
+
+        populateUsernames();
+        */
+        loadBlogs(1);
+    </script>
+</body>
+
+</html>
+``` 

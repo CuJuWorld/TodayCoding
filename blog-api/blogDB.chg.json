@@ -1,0 +1,42 @@
+Above session needs to include during register for the three cases:
+1) if username is duplicated 
+    Error "Duplicated username, please use another one"
+2) if email is duplicated
+    Error "This email is already used for registration"
+3) if password is less than 6 in length
+    Error "password must be at least 6 Alphanumeric"
+
+
+Blog Category
+
+            <option value="Camera / Computer / MobilePhone / Home Appliances">Camera / Computer / MobilePhone / Home Appliances</option>
+            <option value="Drink and Eat">Drink and Eat</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Hiking">Hiking</option>
+            <option value="Learning">Learning</option>
+            <option value="Sightseeing">Sightseeing</option>
+            <option value="Sports & others">Others</option>
+
+Blog DB
+ADD image (MAX 3)
+_id
+67ff21e7ef7eea2e86e0954c
+title
+"Hiking"
+content
+"South pole of Lamma Island"
+author
+67fc81de2a51dc5dc33cdb5c
+
+images
+Array (3)
+0
+"/userblogs-images/1744773600007-Hiking (6).jpeg"
+1
+"/userblogs-images/1744773600007-Hiking (4).jpeg"
+createdAt
+2025-04-16T03:20:07.308+00:00
+updatedAt
+2025-04-16T03:20:07.308+00:00
+__v
+0

@@ -52,10 +52,36 @@ async function deleteUser(id) {
     }
 }
 
+async function registerUser(name, email, password) {
+    const existingUser = await userRepository.findUserByEmail(email);
+    if (existingUser) {
+        throw new Error('Email is already in use');
+    }
+
+    const userData = {
+        name,
+        UserEmail: email,
+        UserPassword: password,
+    };
+
+    return await userRepository.createUser(userData);
+}
+
+async function loginUser(email, password) {
+    const user = await userRepository.findUserByEmail(email);
+    if (!user || user.UserPassword !== password) {
+        throw new Error('Invalid email or password');
+    }
+
+    return user;
+}
+
 module.exports = {
     getAllUsers,
     getUserById,
     createUser,
     updateUser,
     deleteUser,
+    registerUser,
+    loginUser,
 };

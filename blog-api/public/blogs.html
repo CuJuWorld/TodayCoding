@@ -124,12 +124,22 @@
 </head>
 
 <body>
-    <h1>博客列表</h1>
-    <button onclick="window.location.href='/create-blog.html'">創建新博客</button>
-    <button onclick="logout()">登出</button>
+    <h1>Blogger 博客</h1>
+    <button onclick="window.location.href='/create-blog.html'">Create 創建</button>
+    <button onclick="logout()">Logout 登出</button>
+    <select id="categoryFilter" onchange="loadBlogs(1)">
+        <option value="ALL">ALL</option>
+        <option value="Camera / Computer / MobilePhone / Home Appliances">Camera / Computer / MobilePhone / Home Appliances</option>
+        <option value="Drink and Eat">Drink and Eat</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Hiking">Hiking</option>
+        <option value="Learning">Learning</option>
+        <option value="Sightseeing">Sightseeing</option>
+        <option value="Sports & others">Sports & others</option>
+    </select>
     <div id="blogs"></div>
     <div class="pagination" id="pagination"></div>
-    <button id="toTopBtn" onclick="scrollToTop()">↑ 頂部</button>
+    <button id="toTopBtn" onclick="scrollToTop()">↑Top 頂部</button>
 
     <script>
         let currentPage = 1;
@@ -178,8 +188,10 @@
                 currentUserId = await fetchCurrentUser();
             }
 
+            const category = document.getElementById('categoryFilter').value;
+
             try {
-                const response = await fetch(`/api/blogs?page=${page}&limit=${limit}`, {
+                const response = await fetch(`/api/blogs?page=${page}&limit=${limit}&category=${encodeURIComponent(category)}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
 
@@ -196,18 +208,21 @@
                         <div>
                             <h2>${blog.title}</h2>
                             <p>${blog.content.substring(0, 100)}...</p>
-                            <p>作者: ${blog.author.username}</p>
-                            <button class="view-btn" onclick="window.location.href='/view-blog.html?id=${blog._id}'">檢視</button>
+                            <p>author 作者: ${blog.author.username}</p>
+                            <div>
+                            ${blog.images.map(image => `<img src="/blog-img/${image}" style="width: 20%; margin-right: 10px;">`).join('')}
+                             <br><br><button class="view-btn" onclick="window.location.href='/view-blog.html?id=${blog._id}'">View 檢視</button>
                             ${currentUserId === blog.author._id.toString() ?
                             `<button onclick="window.location.href='/edit-blog.html?id=${blog._id}'" 
-                                    style="background-color: #ffc107; margin-right: 10px;">編輯</button>` :
+                                    style="background-color: #ffc107; margin-right: 10px;">Edit 編輯</button>` :
                             ''}
                             ${currentUserId === blog.author._id.toString() ?
-                            `<button class="delete-btn" onclick="deleteBlog('${blog._id}')">刪除</button>` :
+                            `<button class="delete-btn" onclick="deleteBlog('${blog._id}')">Delete 刪除</button>` :
                             ''}
+                            </div>
                             <div class="blog-timestamp">
-                                發布時間: ${formatDate(blog.createdAt)}<br>
-                                更新時間: ${formatDate(blog.updatedAt || blog.createdAt)}
+                                Publish 發布: ${formatDate(blog.createdAt)}<br>
+                                Update 更新: ${formatDate(blog.updatedAt || blog.createdAt)}
                             </div>
                         </div>
                     `).join('');
@@ -257,11 +272,11 @@
             let buttons = '';
 
             if (totalPages === 0) {
-                buttons += `<button disabled>上一頁</button>`;
+                buttons += `<button disabled>Previous上一頁</button>`;
                 buttons += `<button class="active" disabled>1</button>`;
-                buttons += `<button disabled>下一頁</button>`;
+                buttons += `<button disabled>Next下一頁</button>`;
             } else {
-                buttons += `<button onclick="loadBlogs(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>上一頁</button>`;
+                buttons += `<button onclick="loadBlogs(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>Previous上一頁</button>`;
                 const startPage = Math.max(1, currentPage - 2);
                 const endPage = Math.min(totalPages, currentPage + 2);
 
@@ -279,7 +294,7 @@
                     buttons += `<button onclick="loadBlogs(${totalPages})">${totalPages}</button>`;
                 }
 
-                buttons += `<button onclick="loadBlogs(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>下一頁</button>`;
+                buttons += `<button onclick="loadBlogs(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next下一頁</button>`;
             }
 
             paginationDiv.innerHTML = buttons;

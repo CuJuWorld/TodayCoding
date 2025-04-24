@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登錄</title>
+    <style>
+        /* General styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            background-image: url('./img/login_background_img.jpg');
+        }
+
+        /* Styling for the heading */
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        /* Styling for the form container */
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling for form elements */
+        div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Styling for the submit button */
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Styling for additional text and error messages */
+        p {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        #message {
+            margin-top: 15px;
+            color: #dc3545;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>登錄</h1>
+    <!-- Login form -->
+    <form id="loginForm">
+        <div>
+            <!-- Email input field -->
+            <label>電子郵件:</label>
+            <input type="email" id="email" required>
+        </div>
+        <div>
+            <!-- Password input field -->
+            <label>密碼:</label>
+            <input type="password" id="password" required>
+        </div>
+        <!-- Submit button -->
+        <button type="submit">登錄</button>
+    </form>
+    <!-- Link to registration page -->
+    <p>還沒有帳號？<a href="/register.html">註冊</a></p>
+    <!-- Message container for success or error messages -->
+    <div id="message"></div>
+
+    <script>
+        // Add an event listener to handle form submission
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent the default form submission behavior
+
+            // Get the values from the input fields
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                // Send a POST request to the login API
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password }) // Send the form data as JSON
+                });
+
+                const data = await response.json(); // Parse the JSON response
+
+                if (response.ok) {
+                    // If login is successful, store the token in localStorage
+                    localStorage.setItem('token', data.token);
+                    // Redirect to the blogs page
+                    window.location.href = '/blogs.html';
+                } else {
+                    // If login fails, display the error message from the server
+                    document.getElementById('message').textContent = data.message;
+                }
+            } catch (error) {
+                // Handle any network or unexpected errors
+                document.getElementById('message').textContent = '發生錯誤';
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>編輯博客</title>
+    <style>
+        /* General styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            background-image: url('./img/login_background_img.jpg');
+        }
+
+        /* Styling for the heading */
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        /* Styling for the form container */
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Styling for form elements */
+        div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 200px;
+            resize: vertical;
+        }
+
+        /* Styling for buttons */
+        button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: #ffc107;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e0a800;
+        }
+
+        /* Styling for error or success messages */
+        #message {
+            margin-top: 15px;
+            color: #dc3545;
+            text-align: center;
+        }
+
+        .button-secondary {
+            background-color: #6c757d;
+        }
+
+        .button-secondary:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <h1>編輯博客</h1>
+    <!-- Blog editing form -->
+    <form id="editBlogForm" enctype="multipart/form-data">
+        <div>
+            <!-- Dropdown for selecting blog category -->
+            <label>Blog Category:</label>
+            <select id="title" name="title" required>
+                <option value="Camera / Computer / MobilePhone / Home Appliances">Camera / Computer / MobilePhone / Home Appliances</option>
+                <option value="Drink and Eat">Drink and Eat</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Learning">Learning</option>
+                <option value="Sightseeing">Sightseeing</option>
+                <option value="Hiking">Hiking</option>
+                <option value="Others">Sports & Others</option>
+            </select>
+        </div>
+        <div>
+            <!-- Textarea for editing blog content -->
+            <label>內容:</label>
+            <textarea id="content" name="content" required></textarea>
+        </div>
+        <div>
+            <!-- Display existing images -->
+            <label>Existing Photos:</label>
+            <div id="existingImages">
+                <!-- Existing images will be displayed here -->
+            </div>
+        </div>
+        <div>
+            <!-- File input for uploading new images -->
+            <label>New Photos (Max 3 photos; each max 2M):</label>
+            <input type="file" id="images" name="images" accept="image/jpeg, image/png" multiple>
+        </div>
+        <!-- Submit and cancel buttons -->
+        <button type="submit">保存更改</button>
+        <button type="button" class="button-secondary" onclick="window.location.href='/blogs.html'">取消</button>
+    </form>
+    <!-- Message container for success or error messages -->
+    <div id="message"></div>
+
+    <script>
+        // 從 URL 獲取博客 ID
+        const urlParams = new URLSearchParams(window.location.search);
+        const blogId = urlParams.get('id');
+
+        // 檢查是否有 token 和 blogId
+        const token = localStorage.getItem('token');
+        if (!token || !blogId) {
+            window.location.href = '/login.html';
+        }
+
+        // 載入博客數據
+        async function loadBlog() {
+            try {
+                const response = await fetch(`/api/blogs/${blogId}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('無法載入博客');
+                }
+
+                const blog = await response.json();
+                document.getElementById('title').value = blog.title; // Set the category
+                document.getElementById('content').value = blog.content; // Set the content
+
+                // Display existing images at 25% size
+                const existingImagesDiv = document.getElementById('existingImages');
+                existingImagesDiv.innerHTML = blog.images.map(image => `
+                    <img src="${image}" alt="現有圖片" style="max-width: 25%; height: auto; margin-right: 10px;">
+                `).join('');
+            } catch (error) {
+                document.getElementById('message').textContent = '載入博客失敗';
+                localStorage.removeItem('token');
+                setTimeout(() => window.location.href = '/login.html', 1000);
+            }
+        }
+
+        // 提交編輯表單
+        document.getElementById('editBlogForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent the default form submission behavior
+            
+            const formData = new FormData();
+            formData.append('title', document.getElementById('title').value); // Add the selected category
+            formData.append('content', document.getElementById('content').value); // Add the blog content
+            const imagesInput = document.getElementById('images');
+            for (const file of imagesInput.files) {
+                formData.append('images', file); // Add selected images to the FormData object
+            }
+
+            try {
+                // Send a PUT request to the blog update API
+                const response = await fetch(`/api/blogs/${blogId}`, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `Bearer ${token}` }, // Include the authentication token
+                    body: formData // Send the form data
+                });
+                
+                const data = await response.json(); // Parse the JSON response
+                if (response.ok) {
+                    // If the blog is successfully updated, redirect to the blogs page
+                    window.location.href = '/blogs.html';
+                } else {
+                    // If the update fails, display the error message from the server
+                    document.getElementById('message').textContent = data.message;
+                }
+            } catch (error) {
+                // Handle any network or unexpected errors
+                document.getElementById('message').textContent = '保存失敗';
+            }
+        });
+
+        // 頁面載入時執行
+        loadBlog();
+    </script>
+</body>
+</html>

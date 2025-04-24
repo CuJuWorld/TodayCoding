@@ -1,0 +1,357 @@
+[{
+  "_id": {
+    "$oid": "67fc80ab2a51dc5dc33cdb3c"
+  },
+  "title": "Camera / Computer / MobilePhone / Home Appliances",
+  "content": "iphone17 聽講好似話要今年暑假果陣先出",
+  "author": {
+    "$oid": "67fc7fe32a51dc5dc33cdb36"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T03:27:39.291Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T03:27:39.292Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc81452a51dc5dc33cdb49"
+  },
+  "title": "Learning",
+  "content": "本人想寫nodejs, mongoose, express 既 project，找 coding 大大幫下手！",
+  "author": {
+    "$oid": "67fc80be2a51dc5dc33cdb42"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T03:30:13.349Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T03:30:13.349Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc81a42a51dc5dc33cdb56"
+  },
+  "title": "Sharing",
+  "content": "琴日勁熱，今天又突然轉凍，我啲衫褲點部署？",
+  "author": {
+    "$oid": "67fc81632a51dc5dc33cdb4f"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T03:31:48.029Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T03:31:48.029Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc826c2a51dc5dc33cdb63"
+  },
+  "title": "Sharing",
+  "content": "冥想放空\n做運動\n食多啲好野\n個人都會正能量啲啦~",
+  "author": {
+    "$oid": "67fc81de2a51dc5dc33cdb5c"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T03:35:08.614Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T03:35:08.614Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc84b92a51dc5dc33cdb7b"
+  },
+  "title": "Sharing",
+  "content": "有無師兄屋企都有裝修/嚟緊裝修都可以一齊交流下\n本人屋企全面裝修，有啲擔心",
+  "author": {
+    "$oid": "67fc81de2a51dc5dc33cdb5c"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T03:44:57.526Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T03:44:57.526Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc851e2a51dc5dc33cdb87"
+  },
+  "title": "Entertainment",
+  "content": "彈弓狗、傘兵、過山車、咖啡杯，仲有啲乜野好玩？請賜教！",
+  "author": {
+    "$oid": "67fc81de2a51dc5dc33cdb5c"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T03:46:38.678Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T03:46:38.678Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc85dd2a51dc5dc33cdb92"
+  },
+  "title": "Drink and Eat",
+  "content": "乾炒牛何\n韭黃炒蛋飯\n豉椒排骨飯\n常餐ABCD\n全日餐ABCD\n無得輸！",
+  "author": {
+    "$oid": "67fc7fe32a51dc5dc33cdb36"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T03:49:49.633Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T03:49:49.633Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc86512a51dc5dc33cdb98"
+  },
+  "title": "Travel",
+  "content": "睇新聞都成日講好多人去深圳灣、福田口岸乜乜乜...我覺得淨係時間成本都蝕左喎",
+  "author": {
+    "$oid": "67fc7fe32a51dc5dc33cdb36"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T03:51:45.304Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T03:51:45.304Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc86e32a51dc5dc33cdb9e"
+  },
+  "title": "Travel",
+  "content": "日本？韓國？泰國？台灣？每個地方都好想試下去體驗吓呀！",
+  "author": {
+    "$oid": "67fc7fe32a51dc5dc33cdb36"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T03:54:11.710Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T03:54:11.710Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc87ba2a51dc5dc33cdba9"
+  },
+  "title": "Learning",
+  "content": "VSCode\nCursorAI\nChatGPT\nGrokAI\nMongoDB\n全部都幾好用架！有無師兄推介其他 tools 俾大家研究吓？\n嗱 Youtube 果啲唔好攞嚟講話係 tools 呀！",
+  "author": {
+    "$oid": "67fc80be2a51dc5dc33cdb42"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T03:57:46.114Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T03:59:09.821Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc89152a51dc5dc33cdbe1"
+  },
+  "title": "Sharing",
+  "content": "小學要學樂器\n中學要揀科\n大學要搵定邊間公司實習\n出咗嚟社會之後要同同事相處\n好攰呀",
+  "author": {
+    "$oid": "67fc80be2a51dc5dc33cdb42"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T04:03:33.493Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T04:03:33.493Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc89ab2a51dc5dc33cdbf8"
+  },
+  "title": "Camera / Computer / MobilePhone / Home Appliances",
+  "content": "我估計係成個背面都係鏡頭，如果係既話我都驚刮花背面架",
+  "author": {
+    "$oid": "67fc81632a51dc5dc33cdb4f"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T04:06:03.067Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T04:06:03.067Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc8a222a51dc5dc33cdc0a"
+  },
+  "title": "Drink and Eat",
+  "content": "維他檸檬茶\n維他無糖茶\n維他牛奶\n款款都甘正！\n有無師兄發表意見挑機？",
+  "author": {
+    "$oid": "67fc81632a51dc5dc33cdb4f"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T04:08:02.728Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T04:08:02.728Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc8a982a51dc5dc33cdc22"
+  },
+  "title": "Learning",
+  "content": "香港商專是一所歷史悠久、學科齊全、學術實力雄厚、辦學特色鮮明，在國際上具有重要影響力與競爭力的綜合性大學，在多個學術領域具有非常前瞻的科技實力，擁有世界一流的實驗室與師資力量，各種排名均位於全球前列。歡迎大家報考香港商專。",
+  "author": {
+    "$oid": "67fc81632a51dc5dc33cdb4f"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T04:10:00.787Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T04:10:00.787Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc8b372a51dc5dc33cdc34"
+  },
+  "title": "Camera / Computer / MobilePhone / Home Appliances",
+  "content": "本人實測過 無線吸塵器幾好用 但係要成日充電呢點要注意吓",
+  "author": {
+    "$oid": "67fc81632a51dc5dc33cdb4f"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T04:12:39.742Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T04:12:39.742Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc8bc32a51dc5dc33cdc40"
+  },
+  "title": "Entertainment",
+  "content": "微軟XBox 任天堂Switch 索尼PlayStation 真係唔知邊款好用",
+  "author": {
+    "$oid": "67fc81632a51dc5dc33cdb4f"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T04:14:59.822Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T04:14:59.822Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc8c2e2a51dc5dc33cdc4c"
+  },
+  "title": "Others",
+  "content": "Jason Eric Alex Tony Ryan Kelvin Jacky Andy，好多人都叫同樣既名",
+  "author": {
+    "$oid": "67fc81632a51dc5dc33cdb4f"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T04:16:46.745Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T04:16:46.745Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc8d082a51dc5dc33cdc52"
+  },
+  "title": "Drink and Eat",
+  "content": "花之戀最正，三文魚又多又抵食，又有魚子，點輸？",
+  "author": {
+    "$oid": "67fc81632a51dc5dc33cdb4f"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T04:20:24.857Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T04:20:24.857Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc8da12a51dc5dc33cdc6f"
+  },
+  "title": "Entertainment",
+  "content": "爆旋陀螺 魔法doremi 忍者亂太郎\n暫時諗唔到，仲有無其他？",
+  "author": {
+    "$oid": "67fc81de2a51dc5dc33cdb5c"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T04:22:57.791Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T04:22:57.791Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc8e342a51dc5dc33cdc7b"
+  },
+  "title": "Travel",
+  "content": "復活節緊係港人旅遊高峰啦 每個人都請長假同屋企人去旅行 但坊間話日本就快有地震發生 唔知仲去唔去日本玩好？",
+  "author": {
+    "$oid": "67fc81de2a51dc5dc33cdb5c"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T04:25:24.013Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T04:25:24.013Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67fc8ef62a51dc5dc33cdc87"
+  },
+  "title": "Travel",
+  "content": "之前我都用黑白影印過到關 而家話旅遊界獲航空公司規定要彩色先得 好啦要照做 雖然本人覺得唔環保",
+  "author": {
+    "$oid": "67fc81de2a51dc5dc33cdb5c"
+  },
+  "createdAt": {
+    "$date": "2025-04-14T04:28:38.976Z"
+  },
+  "updatedAt": {
+    "$date": "2025-04-14T04:28:38.976Z"
+  },
+  "__v": 0
+}]
