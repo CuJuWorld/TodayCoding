@@ -8,13 +8,21 @@ Uses the function keyword.
 Functions are assigned to variables.
 Reusable and straightforward.
 */
-const square1 = function (num) {
+const square = function (num) {
     return num * num;
 };
 const addsquare1 = function (a, b) {
-    return square1(a) + square1(b);
+    return square(a) + square(b);
 };
-console.log(addsquare1(3, 4)); // Output: 25 (3^2 + 4^2 = 9 + 16)
+console.log("addSquares1:", addsquare1(1, 2)); // Output: 25 (3^2 + 4^2 = 9 + 16)
+
+function addsquareI(a, b) {
+    function square(x) {
+      return x * x;
+    }
+    return square(a) + square(b);
+  }
+console.log("addsquaresI:", addsquareI(1, 2),"\n");
 
 /*
 Predefined Function: Declared separately and reused.
@@ -23,7 +31,13 @@ square2 is predefined and reused in addsquare2.
 */
 const square2 = (num) => num * num;
 const addsquare2 = (a, b) => square2(a) + square2(b);
-console.log(addsquare2(3, 4)); // Output: 25 (3^2 + 4^2 = 9 + 16)
+console.log("addSquares2:", addsquare2(2, 3)); // Output: 25 (3^2 + 4^2 = 9 + 16)
+
+const addSquaresII = (a, b) => {
+    const square = (x) => x * x;
+    return square(a) + square(b);
+  };
+  console.log("addSquaresII:", addSquaresII(2, 3), "\n");
 
 /*
 Inline Arrow Functions: Used directly within the expression.
@@ -36,7 +50,7 @@ Cannot be reused since the function is not assigned to a variable.
 
 */
 const addsquare3 = (a, b) => ((x) => x * x)(a) + ((x) => x * x)(b);
-console.log(addsquare3(3, 4)); // Output: 25 (3^2 + 4^2 = 9 + 16)
+console.log("addSquares3:", addsquare3(3, 4),"\n"); // Output: 25 (3^2 + 4^2 = 9 + 16)
 
 /*
 IIFE: Executes immediately after definition, useful for one-time calculations.
@@ -48,7 +62,7 @@ Often used in older JavaScript patterns (e.g., module patterns) before let, cons
 */
 const addsquare4 = (a, b) => 
     ((() => a * a)()) + ((() => b * b)());
-console.log(addsquare4(3, 4)); // Output: 25 (3^2 + 4^2 = 9 + 16)
+console.log("addSquares4:", addsquare4(4, 5)); // Output: 25 (3^2 + 4^2 = 9 + 16)
 
 /*
 When to Use Which?

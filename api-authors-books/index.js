@@ -7,6 +7,10 @@ const { authorModel, bookModel } = require('./models');
 
 app.use(express.json());
 
+app.listen(port, () => {
+  console.log(`Server listen on http://localhost:${port}`);
+});
+
 app.get('/', (req, res) => {
   res.send('Hello world!');
 });

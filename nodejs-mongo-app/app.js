@@ -19,3 +19,8 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+// Import user routes
+const userRoutes = require('./routes/users');
+app.use('/users', userRoutes); // Use the user routes
+
